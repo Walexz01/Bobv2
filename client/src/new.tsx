@@ -17,7 +17,7 @@ function App() {
       <Show above="lg">
         <GridItem
           position={"fixed"}
-          width={"250px"}
+          width={"200px"}
           h="100vh"
           area={"nav"}
           top={0}
