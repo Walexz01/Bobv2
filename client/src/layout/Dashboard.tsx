@@ -1,7 +1,8 @@
+import { Outlet } from "react-router-dom";
 import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
-import "./index.css";
+import Navbar from "../components/Navbar";
 
-function App() {
+const Dashboard = () => {
   return (
     <Grid
       boxSizing="border-box"
@@ -11,23 +12,22 @@ function App() {
       }}
       templateColumns={{
         base: "1fr",
-        lg: "250px 1fr",
+        lg: "70px 1fr",
+        xl: "190px 1fr",
       }}
     >
       <Show above="lg">
         <GridItem
           position={"fixed"}
-          width={"250px"}
+          width={{ lg: "70px", xl: "190px" }}
           h="100vh"
           area={"nav"}
           top={0}
-          bgColor={{ lg: "red" }}
+          bgColor={"white"}
           bottom={0}
           left={0}
         >
-          <Box width={"170px"} height={"100%"} position={"relative"}>
-            Nav
-          </Box>
+          <Navbar />
         </GridItem>
       </Show>
 
@@ -42,10 +42,12 @@ function App() {
         >
           Header
         </Box>
-        <Box>Main</Box>
+        <Box pt={"70px"} px={"10px"}>
+          <Outlet />
+        </Box>
       </GridItem>
     </Grid>
   );
-}
+};
 
-export default App;
+export default Dashboard;
