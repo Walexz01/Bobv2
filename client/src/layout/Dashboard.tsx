@@ -43,7 +43,7 @@ const Dashboard = () => {
         area={"dash"}
       >
         <Header />
-        <Box pt={"70px"} px={"10px"}>
+        <Box pt={"70px"} px={"10px"} width={"100%"}>
           <Outlet />
         </Box>
       </GridItem>

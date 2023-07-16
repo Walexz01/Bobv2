@@ -52,11 +52,12 @@ const Header = () => {
       outline={"none"}
       borderBottomColor={border}
       gap={"1rem"}
+      zIndex={22}
       borderBottomWidth={"1px"}
     >
       <Hide above="xl">
         <Image
-          width={"160px"}
+          width={{ lg: "140px", base: "100px" }}
           src={colorMode === "light" ? Logo : lightLogo}
           alt="Logo"
         />
