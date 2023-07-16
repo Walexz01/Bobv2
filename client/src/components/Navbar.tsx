@@ -1,14 +1,16 @@
-import { Show, VStack, Box, Image } from "@chakra-ui/react";
+import { Show, VStack, Box, Image, useColorModeValue } from "@chakra-ui/react";
 import { Links } from "../data";
 import Navlink from "./Navlink";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const border = useColorModeValue("gray", "white");
+
   return (
     <Box
       outline={"none"}
-      borderRightColor={"gray"}
+      borderRightColor={border}
       borderRightWidth={"1px"}
       display={"flex"}
       p={"10px"}

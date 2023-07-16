@@ -3,7 +3,10 @@
     margin: 0;
     box-sizing: border-box;
 }
-
+body.chakra-ui-dark .navlink.active{
+    background: #3b3270;
+    color: #d0d3e7;
+}
 .navlink.active{
     background: var(--chakra-colors-blue-50);
     color: #226fe9;

@@ -18,14 +18,25 @@ import {
   MenuGroup,
   MenuDivider,
   Button,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import { BiSearch, BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { VscBellDot } from "react-icons/vsc";
-import { BsMoon } from "react-icons/bs";
+import { BsMoon, BsFillSunFill } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 
 const Dashboard = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const bg = useColorModeValue("white", "#141627");
+  const mainBg = useColorModeValue("#f7f8fa", "#1e2037");
+  const border = useColorModeValue("gray", "white");
+  const color = useColorModeValue("blue.200", "#d0d3e7");
+  const searchColor = useColorModeValue("gray.900", "#d0d3e7");
+  const searchBg = useColorModeValue("gray.50", "#1c1f36");
+  const btnBg = useColorModeValue("gray.100", "#646887");
+
   return (
     <Grid
       boxSizing="border-box"
@@ -46,7 +57,7 @@ const Dashboard = () => {
           h="100vh"
           area={"nav"}
           top={0}
-          bgColor={"white"}
+          bgColor={bg}
           bottom={0}
           left={0}
         >
@@ -58,7 +69,7 @@ const Dashboard = () => {
         h={"200vh"}
         position={"relative"}
         w={"100%"}
-        bgColor={"blue.50"}
+        bgColor={mainBg}
         area={"dash"}
       >
         <Box
@@ -67,14 +78,14 @@ const Dashboard = () => {
           bottom={0}
           width={"100%"}
           height={"60px"}
-          bgColor={"white"}
+          bgColor={bg}
           display={"flex"}
           alignItems={"center"}
           pl={{ lg: "20px", md: "10px" }}
           pr={{ xl: "200px", lg: "80px" }}
           py={{ lg: "10px", md: "5px" }}
           outline={"none"}
-          borderBottomColor={"gray"}
+          borderBottomColor={border}
           gap={"1rem"}
           borderBottomWidth={"1px"}
         >
@@ -84,7 +95,7 @@ const Dashboard = () => {
               fontSize={{ lg: "1rem", xl: "1.3rem" }}
               fontWeight={"bold"}
               // color={"#62656f"}
-              color={"blue.200"}
+              color={color}
               whiteSpace={"nowrap"}
               fontFamily={"cursive"}
             >
@@ -96,7 +107,7 @@ const Dashboard = () => {
             <InputGroup>
               <InputLeftElement
                 pointerEvents={"none"}
-                color={"gray.900"}
+                color={searchColor}
                 fontSize={"1.2rem"}
               >
                 <BiSearch />
@@ -106,7 +117,7 @@ const Dashboard = () => {
                 width={{ xl: "400px", lg: "250px", md: "200px", sm: "auto" }}
                 size={"md"}
                 placeholder="Search..."
-                bgColor={"gray.50"}
+                bgColor={searchBg}
                 borderRadius={"2rem"}
               />
             </InputGroup>
@@ -117,7 +128,7 @@ const Dashboard = () => {
                 borderColor={"gray.400"}
                 p={{ xl: "10px", base: "7px" }}
                 borderRadius={"10px"}
-                _hover={{ bg: "gray.100" }}
+                _hover={{ bg: btnBg }}
               >
                 <VscBellDot size={"1.1rem"} />
               </Box>
@@ -126,21 +137,25 @@ const Dashboard = () => {
                 border={"1px solid gray"}
                 borderColor={"gray.400"}
                 p={{ xl: "10px", base: "7px" }}
-                bgColor={"gray.100"}
+                bgColor={btnBg}
                 borderRadius={"10px"}
                 _hover={{ bg: "none" }}
+                onClick={toggleColorMode}
               >
-                <BsMoon size={"1.1rem"} />
+                {colorMode === "light" ? (
+                  <BsMoon size={"1.1rem"} />
+                ) : (
+                  <BsFillSunFill size={"1.1rem"} />
+                )}
               </Box>
               <Menu>
                 {({ isOpen }) => (
                   <>
                     <MenuButton
-                      _hover={{ bg: "gray.100" }}
+                      _hover={{ bg: btnBg }}
                       isActive={isOpen}
-                      bgColor={"white"}
+                      bgColor={"transparent"}
                       as={Button}
-                      onClick={() => console.log("clicked")}
                       rightIcon={
                         isOpen ? <BiSolidUpArrow /> : <BiSolidDownArrow />
                       }

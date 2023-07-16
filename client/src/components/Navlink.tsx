@@ -1,13 +1,14 @@
-import { Link, Show } from "@chakra-ui/react";
+import { Link, Show, useColorModeValue } from "@chakra-ui/react";
 import { NavLink as ReactLink } from "react-router-dom";
 import { Link as Props } from "../data";
 
 const Navlink = ({ Icon, name, path }: Props) => {
+  const color = useColorModeValue("blackAlpha.800", "#646887");
+
   return (
     <Link
       userSelect={"none"}
       className="navlink"
-      bgColor={"white"}
       width={"100%"}
       p={".6rem"}
       borderRadius={".5rem"}
@@ -16,7 +17,7 @@ const Navlink = ({ Icon, name, path }: Props) => {
       alignItems={"center"}
       justifyContent={{ lg: "center", xl: "flex-start" }}
       gap={"9px"}
-      color={"blackAlpha.800"}
+      color={color}
       as={ReactLink}
       to={path}
     >
