@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <Box
+      outline={"none"}
+      borderRightColor={"gray"}
+      borderRightWidth={"1px"}
       display={"flex"}
       p={"10px"}
       width={"100%"}
