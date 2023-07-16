@@ -1,10 +1,19 @@
-import { Show, VStack, Box, Image, useColorModeValue } from "@chakra-ui/react";
+import {
+  Show,
+  VStack,
+  Box,
+  Image,
+  useColorModeValue,
+  useColorMode,
+} from "@chakra-ui/react";
 import { Links } from "../data";
 import Navlink from "./Navlink";
+import lightLogo from "../assets/lightLogo.png";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const { colorMode } = useColorMode();
   const border = useColorModeValue("gray", "white");
 
   return (
@@ -26,7 +35,7 @@ const Navbar = () => {
             mx={"auto"}
             alignSelf={"center"}
             width={"70%"}
-            src={Logo}
+            src={colorMode === "light" ? Logo : lightLogo}
             alt="Logo"
           />
         </Box>
