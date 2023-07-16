@@ -4,7 +4,7 @@ This is the Full repository for the bob sport shop project, a website built with
 
 ## Tech stack💻:
 
-HTML5,CSS,JavaScript,React,Typescript,Express,Chakra UI
+HTML5,CSS,JavaScript,React,Typescript,Express,Chakra UI,react-table,rechart
 
 ## 🏄 Getting Started
 

@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^2.7.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@tanstack/react-table": "^8.9.3",
     "framer-motion": "^10.12.16",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
