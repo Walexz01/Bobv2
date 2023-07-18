@@ -181,6 +181,153 @@ export interface Product{
     unit_price: number;
   }
 
+export interface Sale{
+    order_id: number;
+    product_id: number;
+    product_name: string;
+    quantity: number;
+    unit_price: number;
+    total_price: number;
+    order_date: number;
+  }
+
+export const AllSale:Sale[] =[
+    {  
+        order_id: 1,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+    {  
+        order_id: 2,
+        product_id: 11,
+        product_name: 'string',
+        quantity: 22,
+        unit_price: 33,
+        total_price: 44,
+        order_date: 11,
+    },
+  ]
 export const AllProducts:Product[] =[
     {
         "id":1,
