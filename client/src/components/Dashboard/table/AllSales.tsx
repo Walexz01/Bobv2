@@ -17,6 +17,7 @@ const AllSales = () => {
       ]}
       isSearchable={true}
       data={tbody}
+      isPag
     />
   );
 };

@@ -10,9 +10,13 @@ import {
   useColorModeValue,
   Box,
   Text,
+  Tfoot,
 } from "@chakra-ui/react";
+import ResponsivePagination from "react-responsive-pagination";
+import "react-responsive-pagination/themes/classic.css";
 import { Link } from "react-router-dom";
 import Searchinput from "./Searchinput";
+import { useState } from "react";
 
 interface Prop {
   heading?: string;
@@ -23,6 +27,8 @@ interface Prop {
   detailPath?: string;
   detailKey?: string;
   isSearchable?: boolean;
+  removeKeys?: string[];
+  isPag?: boolean;
 }
 const Dashtable = ({
   heading,
@@ -30,14 +36,25 @@ const Dashtable = ({
   data,
   path,
   detailPath,
+  removeKeys,
+  isPag = false,
   detailKey = "",
   isDetail = false,
   isSearchable = false,
 }: Prop) => {
   const bg = useColorModeValue("white", "#252944");
   const border = useColorModeValue("gray", "white");
-  const keyarray = Object.keys(data[0]);
+  let keyarray: any[] = [];
 
+  if (removeKeys) {
+    keyarray = Object.keys(data[0]).filter(
+      (value) => !removeKeys.includes(value)
+    );
+  } else {
+    keyarray = Object.keys(data[0]);
+  }
+  const [currentPage, setCurrentPage] = useState(8);
+  const totalPages = 20;
   return (
     <TableContainer
       border={"1px solid gray"}
@@ -92,6 +109,15 @@ const Dashtable = ({
           ))}
         </Tbody>
       </Table>
+      {isPag && (
+        <Box pt={"20px"}>
+          <ResponsivePagination
+            current={currentPage}
+            total={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </Box>
+      )}
     </TableContainer>
   );
 };
