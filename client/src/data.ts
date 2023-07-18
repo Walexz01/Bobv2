@@ -112,13 +112,13 @@ export const RecentOrders:OrderType[] =[
         "Status_name" :"completed"
     }
 ]
-export interface Customer {
+export interface Topcustomer {
     id: number;
     Customer_name: string;
     Total_order: number;
   }
   
-export const Topcustomers:Customer[] =[
+export const Topcustomers:Topcustomer[] =[
     {
         "id":1,
         "Customer_name":"walexz",
@@ -167,14 +167,91 @@ export const Topcustomers:Customer[] =[
         "Total_order" :15
     }
 ]
-export interface Product {
+export interface Topproduct {
     id: number;
     Name: string;
     Total_purchase: number;
     Unit_price: number;
   }
+export interface Product{
+    id: number;
+    name: string;
+    quantity_in_stock: number;
+    description: string;
+    unit_price: number;
+  }
 
-export const Topproducts:Product[] =[
+export const AllProducts:Product[] =[
+    {
+        "id":1,
+        "name":"walexz",
+        "quantity_in_stock" :175,
+        "description":'Great',
+        "unit_price" : 8956
+    },
+    {
+        "id":2,
+        "name":"walex",
+        "quantity_in_stock" :173,
+        "description":'Great ghvhhjh',
+        "unit_price" : 388
+    },
+    {
+        "id":3,
+        "name":"onenine",
+        "quantity_in_stock" :1735,
+        "description":'Great ghvhhjh nn  hvvs',
+        "unit_price" : 3984
+    },
+    {
+        "id":4,
+        "name":"walexz",
+        "quantity_in_stock" :1735,
+        "description":'Great  nn  hvvs',
+        "unit_price" : 387
+    },{
+        "id":5,
+        "name":"bola",
+        "quantity_in_stock" :17905,
+        "description":'Great  nn ,jbhj hvvs',
+        "unit_price" : 3849
+    },
+    {
+        "id":6,
+        "name":"walexz",
+        "quantity_in_stock" :1735,
+        "description":'Great  nn ,jbhj hvvs',
+        "unit_price" : 263
+    },{
+        "id":7,
+        "name":"mosoba",
+        "quantity_in_stock" :1,
+        "description":'Great vgvyu nn ,jbhj hvvs',
+        "unit_price" : 894
+    },
+    {
+        "id":8,
+        "name":"sina",
+        "description":'Great vgvyu nn ,jbhj hvvs',
+        "quantity_in_stock" :1735,
+        "unit_price" : 89
+    },{
+        "id":9,
+        "name":"nike",
+        "quantity_in_stock" :1735,
+        "description":'Great vgvyu nn ,jbhj hvvs',
+        "unit_price" : 34
+    },
+    {
+        "id":10,
+        "name":"israel",
+        "quantity_in_stock" :15,
+        "description":'Great vgvyu nn ,jbhj hvvs',
+        "unit_price" : 134
+    }
+]
+
+export const Topproducts:Topproduct[] =[
     {
         "id":1,
         "Name":"walexz",

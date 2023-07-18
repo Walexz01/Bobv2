@@ -12,15 +12,17 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import Searchinput from "./Searchinput";
 
 interface Prop {
-  heading: string;
+  heading?: string;
   tHead: string[];
   data: any[];
   isDetail?: boolean;
   path?: string;
   detailPath?: string;
   detailKey?: string;
+  isSearchable?: boolean;
 }
 const Dashtable = ({
   heading,
@@ -30,6 +32,7 @@ const Dashtable = ({
   detailPath,
   detailKey = "",
   isDetail = false,
+  isSearchable = false,
 }: Prop) => {
   const bg = useColorModeValue("white", "#252944");
   const border = useColorModeValue("gray", "white");
@@ -50,9 +53,17 @@ const Dashtable = ({
         display={"flex"}
         alignItems={"center"}
         alignContent={"center"}
-        justifyContent={"space-between"}
+        justifyContent={isSearchable ? "flex-end" : "space-between"}
       >
-        <Heading size={"sm"}>{heading}</Heading>
+        {isSearchable && (
+          <Searchinput
+            inputWidth={{ xl: "400px", lg: "250px", md: "100%", sm: "auto" }}
+            placeholder="Search products"
+            groupWidth={"auto"}
+          />
+        )}
+
+        {heading && <Heading size={"sm"}>{heading}</Heading>}
         {path && <Link to={path}>See All</Link>}
       </Box>
 

@@ -1,8 +1,8 @@
-import { Customer, Topcustomers } from "../../../data";
+import { Topcustomer, Topcustomers } from "../../../data";
 import Dashtable from "../Dashtable";
 
 const Toptencustomer = () => {
-  const body: Customer[] = Topcustomers;
+  const body: Topcustomer[] = Topcustomers;
 
   return (
     <Dashtable

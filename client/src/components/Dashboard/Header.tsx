@@ -1,9 +1,6 @@
 import {
   Box,
   Flex,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Show,
   Text,
   Avatar,
@@ -22,18 +19,17 @@ import {
 } from "@chakra-ui/react";
 import Logo from "../../assets/logo.png";
 import lightLogo from "../../assets/lightLogo.png";
-import { BiSearch, BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
+import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { VscBellDot } from "react-icons/vsc";
 import { BsMoon, BsFillSunFill } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
+import Searchinput from "./Searchinput";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const bg = useColorModeValue("white", "#141627");
   const border = useColorModeValue("gray", "white");
   const color = useColorModeValue("blue.200", "#d0d3e7");
-  const searchColor = useColorModeValue("gray.900", "#d0d3e7");
-  const searchBg = useColorModeValue("gray.50", "#1c1f36");
   const btnBg = useColorModeValue("gray.100", "#646887");
 
   return (
@@ -67,7 +63,6 @@ const Header = () => {
           userSelect={"none"}
           fontSize={{ lg: "1rem", xl: "1.3rem" }}
           fontWeight={"bold"}
-          // color={"#62656f"}
           color={color}
           whiteSpace={"nowrap"}
           fontFamily={"cursive"}
@@ -78,25 +73,11 @@ const Header = () => {
 
       <Flex px={"10px"} gap={"10px"} flex={1} flexDir={"row"}>
         <Hide below="md">
-          <InputGroup>
-            <InputLeftElement
-              pointerEvents={"none"}
-              color={searchColor}
-              fontSize={"1.4rem"}
-            >
-              <BiSearch />
-            </InputLeftElement>
-            <Input
-              type="search"
-              width={{ xl: "400px", lg: "250px", md: "100%", sm: "auto" }}
-              size={"md"}
-              placeholder="Search..."
-              bgColor={searchBg}
-              borderRadius={"2rem"}
-            />
-          </InputGroup>
+          <Searchinput
+            inputWidth={{ xl: "400px", lg: "250px", md: "100%", sm: "auto" }}
+            placeholder="Search..."
+          />
         </Hide>
-
         <Box
           display={"flex"}
           gap={"1rem"}
