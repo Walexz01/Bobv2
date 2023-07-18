@@ -16,13 +16,24 @@ import { Link } from "react-router-dom";
 interface Prop {
   heading: string;
   tHead: string[];
-  tbody: any[];
+  data: any[];
   isDetail?: boolean;
   path?: string;
+  detailPath?: string;
+  detailKey?: string;
 }
-const Dashtable = ({ heading, tHead, tbody, path, isDetail = false }: Prop) => {
+const Dashtable = ({
+  heading,
+  tHead,
+  data,
+  path,
+  detailPath,
+  detailKey = "",
+  isDetail = false,
+}: Prop) => {
   const bg = useColorModeValue("white", "#252944");
   const border = useColorModeValue("gray", "white");
+  const keyarray = Object.keys(data[0]);
 
   return (
     <TableContainer
@@ -54,14 +65,14 @@ const Dashtable = ({ heading, tHead, tbody, path, isDetail = false }: Prop) => {
           </Tr>
         </Thead>
         <Tbody>
-          {tbody.map((index) => (
+          {data.map((data, index) => (
             <Tr key={index}>
-              <Td>inches</Td>
-              <Td>millimetres (mm)</Td>
-              <Td isNumeric>25.4</Td>
+              {keyarray.map((value, index) => (
+                <Td key={index}>{data[value]}</Td>
+              ))}
               {isDetail && (
                 <Td>
-                  <Text to={path} as={Link}>
+                  <Text to={`${detailPath}/${data[detailKey]}`} as={Link}>
                     Detail
                   </Text>
                 </Td>

@@ -1,16 +1,12 @@
-import Dashtable from "./Dashtable";
+import { Box } from "@chakra-ui/react";
+import Toptencustomer from "./table/Toptencustomer";
+import Toptenproducts from "./table/Toptenproducts";
 const Homeright = () => {
-  const body: string[] = ["sddd", "ddddd", "", "dd"];
   return (
-    <>
-      <Dashtable
-        isDetail={true}
-        heading="Walexz"
-        tHead={["id", "name", "Total Order", ""]}
-        tbody={body}
-        path="/"
-      />
-    </>
+    <Box display={"flex"} flexDir={"column"} gap={"1rem"}>
+      <Toptencustomer />
+      <Toptenproducts />
+    </Box>
   );
 };
 

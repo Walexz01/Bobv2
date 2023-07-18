@@ -64,7 +64,7 @@ export default function Homechart() {
   const chartWidth = useBreakpointValue(
     {
       base: 250,
-      md: 300,
+      md: 360,
       xl: 500,
     },
     {

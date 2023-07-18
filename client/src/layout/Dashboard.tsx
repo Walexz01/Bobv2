@@ -35,13 +35,7 @@ const Dashboard = () => {
         </GridItem>
       </Show>
 
-      <GridItem
-        h={"200vh"}
-        position={"relative"}
-        w={"100%"}
-        bgColor={mainBg}
-        area={"dash"}
-      >
+      <GridItem position={"relative"} w={"100%"} bgColor={mainBg} area={"dash"}>
         <Header />
         <Box pt={"70px"} px={"10px"} width={"100%"}>
           <Outlet />
