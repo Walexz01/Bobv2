@@ -6,11 +6,11 @@ import {
   useColorModeValue,
   useColorMode,
 } from "@chakra-ui/react";
-import { Links } from "../data";
 import Navlink from "./Navlink";
-import lightLogo from "../assets/lightLogo.png";
-import Logo from "../assets/logo.png";
+import lightLogo from "../../assets/lightLogo.png";
+import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
+import { Links } from "../../data";
 
 const Navbar = () => {
   const { colorMode } = useColorMode();

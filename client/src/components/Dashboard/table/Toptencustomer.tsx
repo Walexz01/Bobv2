@@ -1,4 +1,4 @@
-import { Customer, Topcustomers } from "../../data";
+import { Customer, Topcustomers } from "../../../data";
 import Dashtable from "../Dashtable";
 
 const Toptencustomer = () => {

@@ -1,4 +1,4 @@
-import { Product, Topproducts } from "../../data";
+import { Product, Topproducts } from "../../../data";
 import Dashtable from "../Dashtable";
 
 const Toptenproducts = () => {

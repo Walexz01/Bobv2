@@ -1,6 +1,6 @@
 import { Link, Show, useColorModeValue } from "@chakra-ui/react";
 import { NavLink as ReactLink } from "react-router-dom";
-import { Link as Props } from "../data";
+import { Link as Props } from "../../data";
 
 const Navlink = ({ Icon, name, path }: Props) => {
   const color = useColorModeValue("blackAlpha.800", "#646887");

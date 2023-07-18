@@ -20,8 +20,8 @@ import {
   Hide,
   Image,
 } from "@chakra-ui/react";
-import Logo from "../assets/logo.png";
-import lightLogo from "../assets/lightLogo.png";
+import Logo from "../../assets/logo.png";
+import lightLogo from "../../assets/lightLogo.png";
 import { BiSearch, BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import { VscBellDot } from "react-icons/vsc";
 import { BsMoon, BsFillSunFill } from "react-icons/bs";

@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import "./index.css";
 import Dashboard from "./layout/Dashboard";
-import Home from "./pages/Home";
-import Customers from "./pages/Customers";
-import Orders from "./pages/Orders";
-import Sales from "./pages/Sales";
-import Payments from "./pages/Payments";
-import Products from "./pages/Products";
+import Customers from "./pages/Dashboard/Customers";
+import Home from "./pages/Dashboard/Home";
+import Orders from "./pages/Dashboard/Orders";
+import Payments from "./pages/Dashboard/Payments";
+import Products from "./pages/Dashboard/Products";
+import Sales from "./pages/Dashboard/Sales";
 
 const routes = createBrowserRouter([
   {

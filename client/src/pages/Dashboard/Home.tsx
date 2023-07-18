@@ -1,6 +1,6 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import Homeright from "../components/Homeright";
-import HomeLeft from "../components/HomeLeft";
+import HomeLeft from "../../components/Dashboard/HomeLeft";
+import Homeright from "../../components/Dashboard/Homeright";
 
 const Home = () => {
   return (

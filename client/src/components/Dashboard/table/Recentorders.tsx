@@ -1,4 +1,4 @@
-import { OrderType, RecentOrders } from "../../data";
+import { OrderType, RecentOrders } from "../../../data";
 import Dashtable from "../Dashtable";
 
 const Recentorders = () => {
