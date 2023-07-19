@@ -1,8 +1,11 @@
 import { useMediaQuery } from "@chakra-ui/react";
 import { AllProducts, Product } from "../../../data";
 import Dashtable from "../Dashtable";
+import { useState } from "react";
 
 const AllProduct = () => {
+  const [searchValue, setSearchValue] = useState("");
+
   const [isSmallerThan730] = useMediaQuery("(max-width: 730px)");
   const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
   const [isSmallerThan400] = useMediaQuery("(max-width: 400px)");
@@ -29,6 +32,8 @@ const AllProduct = () => {
       isSearchable={true}
       data={tbody}
       removeKeys={removekeys}
+      searchInput={searchValue}
+      setSearch={(value) => setSearchValue(value)}
     />
   );
 };

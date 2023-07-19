@@ -24,8 +24,11 @@ import { VscBellDot } from "react-icons/vsc";
 import { BsMoon, BsFillSunFill } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import Searchinput from "./Searchinput";
+import { useState } from "react";
 
 const Header = () => {
+  const [searchValue, setSearchValue] = useState("");
+
   const { colorMode, toggleColorMode } = useColorMode();
   const bg = useColorModeValue("white", "#141627");
   const border = useColorModeValue("gray", "white");
@@ -76,6 +79,8 @@ const Header = () => {
           <Searchinput
             inputWidth={{ xl: "400px", lg: "250px", md: "100%", sm: "auto" }}
             placeholder="Search..."
+            value={searchValue}
+            setInput={(value) => setSearchValue(value)}
           />
         </Hide>
         <Box

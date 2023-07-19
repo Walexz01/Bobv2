@@ -9,8 +9,16 @@ interface Props {
   placeholder: string;
   inputWidth: object;
   groupWidth?: string;
+  value: string;
+  setInput: (e: string) => void;
 }
-const Searchinput = ({ placeholder, inputWidth, groupWidth }: Props) => {
+const Searchinput = ({
+  placeholder,
+  inputWidth,
+  value,
+  groupWidth,
+  setInput,
+}: Props) => {
   const searchColor = useColorModeValue("gray.900", "#d0d3e7");
   const searchBg = useColorModeValue("gray.50", "#1c1f36");
 
@@ -30,6 +38,8 @@ const Searchinput = ({ placeholder, inputWidth, groupWidth }: Props) => {
         placeholder={placeholder}
         bgColor={searchBg}
         borderRadius={"2rem"}
+        value={value}
+        onChange={(e) => setInput(e.target.value)}
       />
     </InputGroup>
   );
