@@ -7,9 +7,12 @@ const Recentorders = () => {
   return (
     <Dashtable
       heading="Reccent Order"
-      tHead={["id", "Customer Name", "Amount", "Status"]}
+      tHead={["id", "Customer Name", "Amount", "Status", ""]}
       data={tbody}
       path="orders"
+      isDetail
+      detailPath="order"
+      detailKey="Order_id"
     />
   );
 };
