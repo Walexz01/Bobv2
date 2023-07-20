@@ -9,9 +9,9 @@ const Recentorders = () => {
       heading="Reccent Order"
       tHead={["id", "Customer Name", "Amount", "Status", ""]}
       data={tbody}
-      path="orders"
+      path="/dash/orders"
       isDetail
-      detailPath="order"
+      detailPath="/dash/order"
       detailKey="Order_id"
     />
   );

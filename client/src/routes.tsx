@@ -7,34 +7,46 @@ import Orders from "./pages/Dashboard/Orders";
 import Payments from "./pages/Dashboard/Payments";
 import Products from "./pages/Dashboard/Products";
 import Sales from "./pages/Dashboard/Sales";
+import Landing from "./layout/Landing";
+import About from "./components/Landing/About";
 
 const routes = createBrowserRouter([
   {
     path: "/",
+    element: <Landing />,
+    children: [
+      {
+        path: "about",
+        element: <About />,
+      },
+    ],
+  },
+  {
+    path: "dash",
     element: <Dashboard />,
     children: [
       {
-        path: "",
+        path: "home",
         element: <Home />,
       },
       {
-        path: "/customers",
+        path: "customers",
         element: <Customers />,
       },
       {
-        path: "/orders",
+        path: "orders",
         element: <Orders />,
       },
       {
-        path: "/sales",
+        path: "sales",
         element: <Sales />,
       },
       {
-        path: "/payments",
+        path: "payments",
         element: <Payments />,
       },
       {
-        path: "/products",
+        path: "products",
         element: <Products />,
       },
     ],

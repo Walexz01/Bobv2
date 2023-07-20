@@ -1,6 +1,7 @@
 *,body,*::after,*::before{
     padding: 0;
     margin: 0;
+    list-style: none;
     box-sizing: border-box;
 }
 body.chakra-ui-dark .navlink.active{
@@ -11,3 +12,4 @@ body.chakra-ui-dark .navlink.active{
     background: var(--chakra-colors-blue-50);
     color: #226fe9;
 }
+

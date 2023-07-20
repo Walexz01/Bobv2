@@ -16,32 +16,32 @@ export interface Link{
 export const Links:Link[] = [
     {
         name: "Home",
-        path: '/',
+        path: 'home',
         Icon:AiOutlineHome
     },
     {
         name: "Customers",
-        path: '/customers',
+        path: 'customers',
         Icon: RxPerson
     },
     {
         name: "Orders",
-        path: '/orders',
+        path: 'orders',
         Icon:TbExchange
     },
     {
         name: "Sales",
-        path: '/sales',
+        path: 'sales',
         Icon: BsBag
     },
     {
         name: "Payments",
-        path: '/payments',
+        path: 'payments',
         Icon: BiDollarCircle
     },
     {
         name: "Products",
-        path: '/products',
+        path: 'products',
         Icon: SlSocialDropbox
     }
 ]

@@ -10,7 +10,7 @@ const Toptencustomer = () => {
       heading="Top 10 Customers"
       tHead={["id", "name", "Total Order", ""]}
       data={body}
-      detailPath="customers"
+      detailPath="/dash/customers"
       detailKey="id"
     />
   );
