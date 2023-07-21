@@ -45,7 +45,9 @@ interface Prop {
   currentPage?: number;
   setcurrentPage?: (e: number) => void;
   sortBy?: sortType;
+  rankBy?: sortType;
   setSortBy?: (e: sortType) => void;
+  setRankBy?: (e: sortType) => void;
   sortArray?: sortType[];
 }
 const Dashtable = ({
@@ -57,6 +59,7 @@ const Dashtable = ({
   removeKeys,
   setcurrentPage,
   setSortBy,
+  setRankBy,
   setSearch,
   searchInput = "",
   currentPage = 1,
@@ -67,6 +70,7 @@ const Dashtable = ({
   isSort = false,
   isSearchable = false,
   sortBy = { label: "", value: "" },
+  rankBy = { label: "", value: "" },
   sortArray = [],
 }: Prop) => {
   const bg = useColorModeValue("white", "#252944");
@@ -81,6 +85,18 @@ const Dashtable = ({
     keyarray = Object.keys(data[0]);
   }
   const totalPages = Math.ceil(data.length / count);
+
+  const rankArray: sortType[] = [
+    {
+      label: "Ascending",
+      value: "asc",
+    },
+    {
+      label: "Descending",
+      value: "desc",
+    },
+  ];
+
   return (
     <TableContainer
       border={"1px solid gray"}
@@ -110,6 +126,27 @@ const Dashtable = ({
             {isSort && (
               <Box display={"flex"} alignItems={"center"} gap={".5rem"}>
                 <Heading size={"sm"}>Sort by:</Heading>
+
+                <Menu>
+                  <MenuButton as={Button} rightIcon={<BiSolidDownArrow />}>
+                    {rankBy.label ? rankBy.label : "select"}
+                  </MenuButton>
+                  <MenuList>
+                    {rankArray.map(({ label, value }, index) => (
+                      <MenuItem
+                        key={index}
+                        onClick={
+                          setRankBy
+                            ? () => setRankBy({ label, value })
+                            : () => {}
+                        }
+                      >
+                        {label}
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                </Menu>
+
                 <Menu>
                   <MenuButton as={Button} rightIcon={<BiSolidDownArrow />}>
                     {sortBy.label ? sortBy.label : "select"}

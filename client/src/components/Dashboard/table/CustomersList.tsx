@@ -9,6 +9,10 @@ const CustomersList = () => {
   const [currentPage, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [sortBy, setSortBy] = useState<sortType>({ label: "", value: "" });
+  const [rankBy, setRankBy] = useState<sortType>({
+    label: "Ascending",
+    value: "asc",
+  });
 
   const [isSmallerThan730] = useMediaQuery("(max-width: 730px)");
   const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
@@ -68,6 +72,8 @@ const CustomersList = () => {
       sortArray={sortArray}
       searchInput={searchValue}
       setSearch={(value) => setSearchValue(value)}
+      setRankBy={(rank) => setRankBy(rank)}
+      rankBy={rankBy}
     />
   );
 };
