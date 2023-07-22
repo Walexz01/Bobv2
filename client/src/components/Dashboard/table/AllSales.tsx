@@ -59,7 +59,6 @@ const AllSales = () => {
       data={tbody}
       removeKeys={removekeys}
       isPag
-      count={10}
       currentPage={currentPage}
       setcurrentPage={(page) => setPage(page)}
       isSort

@@ -1,80 +1,121 @@
-import { useState } from "react";
-import { AllSale, Sale } from "../../../data";
+import { useEffect, useState } from "react";
 import Dashtable, { sortType } from "../Dashtable";
 import { useMediaQuery } from "@chakra-ui/react";
+import { axiosInstance } from "../../../services/api-client";
+import Skeletontable from "../feedback/Skeletontable";
 
 const CustomersList = () => {
-  const tbody: Sale[] = AllSale;
-
   const [currentPage, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
-  const [sortBy, setSortBy] = useState<sortType>({ label: "", value: "" });
+  const [sortBy, setSortBy] = useState<sortType>({
+    label: "Order id",
+    value: "id",
+  });
   const [rankBy, setRankBy] = useState<sortType>({
     label: "Ascending",
     value: "asc",
   });
+  const [isLoading, setIsLoading] = useState(true);
+  interface datain {
+    currentPage: number;
+    totalItems: number;
+    totalPages: number;
+    results: any[];
+  }
 
+  const [Data, setdata] = useState<datain>({
+    currentPage,
+    totalItems: 0,
+    results: [],
+    totalPages: 0,
+  });
   const [isSmallerThan730] = useMediaQuery("(max-width: 730px)");
-  const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
+  const [isSmallerThan580] = useMediaQuery("(max-width: 580px)");
   const [isSmallerThan460] = useMediaQuery("(max-width: 460px)");
+
+  const tbody = Data?.results;
 
   const sortArray: sortType[] = [
     {
       label: "Order id",
-      value: "order_id",
-    },
-    {
-      label: "Product id",
-      value: "product_id",
+      value: "id",
     },
     {
       label: "Name",
-      value: "name",
+      value: "customer_name",
+    },
+    {
+      label: "Date",
+      value: "registration_date",
+    },
+    {
+      label: "Time",
+      value: "registration_time",
     },
   ];
 
   const thead = isSmallerThan460
-    ? ["Order id", "Product Name", "Total Price"]
-    : isSmallerThan500
-    ? ["Order id", "Product Name", "Quantity", "Total Price"]
+    ? ["id", "Name"]
+    : isSmallerThan580
+    ? ["id", "Name", "Address", "Created Date"]
     : isSmallerThan730
-    ? ["Order id", "Product Name", "Quantity", "Total Price"]
-    : [
-        "Order id",
-        "Product Id",
-        "Product Name",
-        "Quantity",
-        "Unit Price",
-        "Total Price",
-        "date_time",
-      ];
+    ? ["id", "Name", "Address", "Created Date"]
+    : ["id", "Name", "Address", "Created Time", "Created Date"];
   const removekeys = isSmallerThan460
-    ? ["product_id", "order_date", "unit_price", "quantity"]
-    : isSmallerThan500
-    ? ["product_id", "order_date", "unit_price"]
+    ? ["registration_time", "registration_date", "address"]
+    : isSmallerThan580
+    ? ["registration_time", ""]
     : isSmallerThan730
-    ? ["product_id", "order_date", "unit_price"]
+    ? ["registration_time"]
     : [""];
 
+  const getCustomers = async () => {
+    setIsLoading(true);
+    try {
+      const result = await axiosInstance.get(`customers`, {
+        params: {
+          search: searchValue,
+          page: currentPage,
+          size: 20,
+          sort: sortBy.value,
+          rank: rankBy.value,
+        },
+      });
+      setdata(result.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    // setTimeout(() => {
+    getCustomers();
+    // }, 500);
+  }, [rankBy, sortBy, searchValue, currentPage]);
+
   return (
-    <Dashtable
-      tHead={thead}
-      isSearchable={true}
-      data={tbody}
-      removeKeys={removekeys}
-      isPag
-      count={10}
-      currentPage={currentPage}
-      setcurrentPage={(page) => setPage(page)}
-      isSort
-      sortBy={sortBy}
-      setSortBy={(sort) => setSortBy(sort)}
-      sortArray={sortArray}
-      searchInput={searchValue}
-      setSearch={(value) => setSearchValue(value)}
-      setRankBy={(rank) => setRankBy(rank)}
-      rankBy={rankBy}
-    />
+    <>
+      <Dashtable
+        tHead={thead}
+        isSearchable={true}
+        data={tbody}
+        removeKeys={removekeys}
+        isPag
+        currentPage={currentPage}
+        setcurrentPage={(page) => setPage(page)}
+        isSort
+        sortBy={sortBy}
+        setSortBy={(sort) => setSortBy(sort)}
+        sortArray={sortArray}
+        searchInput={searchValue}
+        setSearch={(value) => setSearchValue(value)}
+        setRankBy={(rank) => setRankBy(rank)}
+        rankBy={rankBy}
+        totalPages={Data.totalPages}
+        isLoading={isLoading}
+      />
+    </>
   );
 };
 
