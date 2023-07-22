@@ -68,4 +68,26 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/top", async (req, res) => {
+  try {
+    const query = `
+                SELECT 
+                c.id, customer_name, address, COUNT(o.customer_id) AS total_order
+            FROM
+                customers c
+                    LEFT JOIN
+                orders o ON c.id = o.customer_id
+            GROUP BY o.customer_id
+            HAVING total_order > 0
+            ORDER BY total_order
+            LIMIT 10
+            `;
+    const [result] = await connection.promise().query(query);
+    res.json(result);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({ error: "An error occurred while fetching data" });
+  }
+});
+
 module.exports = router;
