@@ -7,14 +7,15 @@ router.get("^/$|^/:sort$|/:sort/(:rank)?", async (req, res) => {
   const rank = req.params.rank;
   const search = req.query.search;
   try {
-    let query = ` SELECT 
+    let query = `SELECT 
     op.order_id AS id,
     p.id AS product_id,
     p.name AS product_name ,
     op.quantity,
     p.unit_price,
     op.quantity * p.unit_price AS total_price,
-    o.order_date
+    DATE_FORMAT(o.order_date, '%r') AS sale_time,
+    DATE_FORMAT(o.order_date, '%Y-%m-%d') AS sale_date
 FROM
     order_products op
         JOIN
@@ -42,7 +43,6 @@ FROM
 
     const [result] = await connection.promise().query(query);
     res.json(result);
-    console.log(query);
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({ error: "An error occurred while fetching data" });

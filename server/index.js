@@ -9,6 +9,8 @@ const path = require("path");
 const customers = require("./routes/customers");
 const products = require("./routes/products");
 const sales = require("./routes/sales");
+const payments = require("./routes/payments");
+const orders = require("./routes/orders");
 
 const app = express();
 
@@ -29,6 +31,8 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use("/api/customers", customers);
 app.use("/api/products", products);
 app.use("/api/sales", sales);
+app.use("/api/payments", payments);
+app.use("/api/orders", orders);
 
 const port = process.env.PORT | 500;
 
