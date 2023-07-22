@@ -1,12 +1,12 @@
 import Pageheader from "../../components/Dashboard/Pageheader";
-import AllSales from "../../components/Dashboard/table/AllSales";
 import { Box } from "@chakra-ui/react";
+import PaymentList from "../../components/Dashboard/table/PaymentsList";
 
 const Payments = () => {
   return (
     <Box display={"flex"} flexDir={"column"} gap={"1rem"}>
       <Pageheader name="Payments List" />
-      <AllSales />
+      <PaymentList />
     </Box>
   );
 };

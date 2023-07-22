@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Dashtable, { sortType } from "../Dashtable";
 import { useMediaQuery } from "@chakra-ui/react";
 import { axiosInstance } from "../../../services/api-client";
-import Skeletontable from "../feedback/Skeletontable";
 
 const CustomersList = () => {
   const [currentPage, setPage] = useState(1);
