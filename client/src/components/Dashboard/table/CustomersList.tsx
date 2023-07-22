@@ -88,9 +88,7 @@ const CustomersList = () => {
   };
 
   useEffect(() => {
-    // setTimeout(() => {
     getCustomers();
-    // }, 500);
   }, [rankBy, sortBy, searchValue, currentPage]);
 
   return (

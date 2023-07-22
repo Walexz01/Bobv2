@@ -238,10 +238,12 @@ const Dashtable = ({
                     <Td
                       key={index}
                       color={
-                        text == "walexz"
-                          ? "red"
-                          : text == "onenine"
+                        text == "completed"
                           ? "green"
+                          : text == "pending"
+                          ? "yellow"
+                          : text == "cancel"
+                          ? "red"
                           : ""
                       }
                     >

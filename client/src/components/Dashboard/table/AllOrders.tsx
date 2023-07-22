@@ -1,54 +1,117 @@
-import { useState } from "react";
-import { AllSale, Sale } from "../../../data";
+import { useEffect, useState } from "react";
 import Dashtable, { sortType } from "../Dashtable";
 import { useMediaQuery } from "@chakra-ui/react";
+import { axiosInstance } from "../../../services/api-client";
 const AllOrders = () => {
-  const tbody: Sale[] = AllSale;
-
   const [currentPage, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
-  const [sortBy, setSortBy] = useState<sortType>({ label: "", value: "" });
+  const [sortBy, setSortBy] = useState<sortType>({
+    label: "Order id",
+    value: "id",
+  });
+
+  const [rankBy, setRankBy] = useState<sortType>({
+    label: "Ascending",
+    value: "asc",
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  interface datain {
+    currentPage: number;
+    totalItems: number;
+    totalPages: number;
+    results: any[];
+  }
+
+  const [Data, setdata] = useState<datain>({
+    currentPage,
+    totalItems: 0,
+    results: [],
+    totalPages: 0,
+  });
 
   const [isSmallerThan730] = useMediaQuery("(max-width: 730px)");
-  const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
-  const [isSmallerThan460] = useMediaQuery("(max-width: 460px)");
+  const [isSmallerThan630] = useMediaQuery("(max-width: 630px)");
+  const [isSmallerThan540] = useMediaQuery("(max-width: 540px)");
+  const [isSmallerThan480] = useMediaQuery("(max-width: 480px)");
+
+  const tbody = Data?.results;
 
   const sortArray: sortType[] = [
     {
       label: "Order id",
-      value: "order_id",
+      value: "id",
     },
     {
-      label: "Product id",
-      value: "product_id",
+      label: "Customer name",
+      value: "customer_name",
     },
     {
-      label: "Name",
-      value: "name",
+      label: "Amount",
+      value: "total_amount",
+    },
+    {
+      label: "Seller",
+      value: "seller",
+    },
+    {
+      label: "Status",
+      value: "status_name",
+    },
+    {
+      label: "Date",
+      value: "order_date",
     },
   ];
-  const thead = isSmallerThan460
-    ? ["Order id", "Product Name", "Total Price"]
-    : isSmallerThan500
-    ? ["Order id", "Product Name", "Quantity", "Total Price"]
+  const thead = isSmallerThan480
+    ? ["Order id", "Total amount", "status"]
+    : isSmallerThan540
+    ? ["Order id", "Customer Name", "Total amount", "status"]
+    : isSmallerThan630
+    ? ["Order id", "Customer Name", "Total amount", "seller", "status"]
     : isSmallerThan730
-    ? ["Order id", "Product Name", "Quantity", "Total Price"]
+    ? ["Order id", "Customer Name", "Total amount", "seller", "status", "date"]
     : [
         "Order id",
-        "Product Id",
-        "Product Name",
-        "Quantity",
-        "Unit Price",
-        "Total Price",
-        "date_time",
+        "Customer Name",
+        "Total amount",
+        "seller",
+        "status",
+        "time",
+        "date",
       ];
-  const removekeys = isSmallerThan460
-    ? ["product_id", "order_date", "unit_price", "quantity"]
-    : isSmallerThan500
-    ? ["product_id", "order_date", "unit_price"]
+  const removekeys = isSmallerThan480
+    ? ["order_time", "order_date", "seller", "customer_name"]
+    : isSmallerThan540
+    ? ["order_time", "order_date", "seller"]
+    : isSmallerThan630
+    ? ["order_time", "order_date"]
     : isSmallerThan730
-    ? ["product_id", "order_date", "unit_price"]
+    ? ["order_time"]
     : [""];
+
+  const getOrders = async () => {
+    setIsLoading(true);
+    try {
+      const result = await axiosInstance.get(`orders`, {
+        params: {
+          search: searchValue,
+          page: currentPage,
+          size: 20,
+          sort: sortBy.value,
+          rank: rankBy.value,
+        },
+      });
+      setdata(result.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getOrders();
+  }, [rankBy, sortBy, searchValue, currentPage]);
+
   return (
     <Dashtable
       tHead={thead}
@@ -64,6 +127,10 @@ const AllOrders = () => {
       sortArray={sortArray}
       searchInput={searchValue}
       setSearch={(value) => setSearchValue(value)}
+      setRankBy={(rank) => setRankBy(rank)}
+      rankBy={rankBy}
+      totalPages={Data.totalPages}
+      isLoading={isLoading}
     />
   );
 };
