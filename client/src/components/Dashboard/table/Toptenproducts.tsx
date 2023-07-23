@@ -4,6 +4,8 @@ import { axiosInstance } from "../../../services/api-client";
 import { useMediaQuery } from "@chakra-ui/react";
 
 const Toptenproducts = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [isSmallerThan960] = useMediaQuery("(max-width: 960px)");
   const [isSmallerThan860] = useMediaQuery("(max-width: 860px)");
   const [isSmallerThan520] = useMediaQuery("(max-width: 520px)");
@@ -11,8 +13,10 @@ const Toptenproducts = () => {
   const [body, setbody] = useState([]);
 
   const getTopProducts = async () => {
+    setIsLoading(true);
     const result = await axiosInstance.get("products/top");
     setbody(result.data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -39,6 +43,7 @@ const Toptenproducts = () => {
       tHead={tHead}
       data={body}
       removeKeys={removekeys}
+      isLoading={isLoading}
     />
   );
 };
