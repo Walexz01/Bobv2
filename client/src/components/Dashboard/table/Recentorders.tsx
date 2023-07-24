@@ -18,7 +18,6 @@ const Recentorders = () => {
     totalPages: 0,
   });
   const tbody = Data?.results;
-  console.log(tbody);
 
   const removekeys = ["order_time", "order_date", "seller"];
 

@@ -13,3 +13,6 @@ body.chakra-ui-dark .navlink.active{
     color: #226fe9;
 }
 
+.loader{
+    width: 80px;
+}
