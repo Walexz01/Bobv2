@@ -89,5 +89,24 @@ router.get("/top", async (req, res) => {
     res.status(500).json({ error: "An error occurred while fetching data" });
   }
 });
+router.post("/", async (req, res) => {
+  const { name, address } = req.body;
+  const [[isAvailable]] = await connection
+    .promise()
+    .query("SELECT *  FROM customers WHERE customer_name = ?", [name]);
+  try {
+    if (isAvailable) {
+      res.status(409).json("customer available");
+    } else {
+      const query = `INSERT INTO customers(customer_name,address)
+      VALUES(?, ?)`;
+      await connection.promise().query(query, [name, address]);
+      res.status(201).json("customer created");
+    }
+  } catch (err) {
+    console.log("Error adding data:", err);
+    res.status(500).json({ error: "An error occurred while adding data" });
+  }
+});
 
 module.exports = router;

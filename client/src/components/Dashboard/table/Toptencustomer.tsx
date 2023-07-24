@@ -22,12 +22,12 @@ const Toptencustomer = () => {
     getTopCustomers();
   }, []);
   const tHead = isSmallerThan520
-    ? ["id", "name", "Total Order", ""]
+    ? ["id", "name", "Total Order"]
     : isSmallerThan860
-    ? ["id", "name", "address", "Total Order", ""]
+    ? ["id", "name", "address", "Total Order"]
     : isSmallerThan920
     ? ["id", "name", "Total Order", ""]
-    : ["id", "name", "address", "Total Order", ""];
+    : ["id", "name", "address", "Total Order"];
   const removekeys = isSmallerThan520
     ? ["address"]
     : isSmallerThan860
@@ -37,7 +37,7 @@ const Toptencustomer = () => {
     : [""];
   return (
     <Dashtable
-      isDetail={true}
+      isDetail
       heading="Top 10 Customers"
       tHead={tHead}
       data={body}

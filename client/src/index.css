@@ -16,3 +16,6 @@ body.chakra-ui-dark .navlink.active{
 .loader{
     width: 80px;
 }
+.modalform{
+    width: 100%;
+}

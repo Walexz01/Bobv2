@@ -101,4 +101,18 @@ router.get("/top", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  const { name, price, quantity, description } = req.body;
+  const query = `INSERT INTO products(name,quantity_in_stock,description,unit_price) VALUES(?,?,?,?)`;
+  try {
+    await connection
+      .promise()
+      .query(query, [name, quantity, description, price]);
+    res.status(201).json("Product added");
+  } catch (error) {
+    console.log("Error adding data:", err);
+    res.status(500).json({ error: "An error occurred while adding data" });
+  }
+});
+
 module.exports = router;

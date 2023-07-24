@@ -9,7 +9,6 @@ import {
   Heading,
   useColorModeValue,
   Box,
-  Text,
   MenuButton,
   Button,
   Menu,
@@ -20,7 +19,7 @@ import ResponsivePagination from "react-responsive-pagination";
 import { BiSolidDownArrow } from "react-icons/bi";
 
 import "react-responsive-pagination/themes/classic.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Searchinput from "./Searchinput";
 import Skeletontable from "./feedback/Skeletontable";
 export interface sortType {
@@ -102,6 +101,7 @@ const Dashtable = ({
     },
   ];
 
+  const navigate = useNavigate();
   return (
     <TableContainer
       border={"1px solid gray"}
@@ -229,9 +229,16 @@ const Dashtable = ({
           </Tr>
         </Thead>
         {!isLoading && (
-          <Tbody>
+          <Tbody cursor={"pointer"}>
             {data.map((data, index) => (
-              <Tr key={index}>
+              <Tr
+                key={index}
+                onClick={
+                  isDetail
+                    ? () => navigate(`${detailPath}/${data[detailKey]}`)
+                    : () => {}
+                }
+              >
                 {keyarray.map((value, index) => {
                   const text = data[value];
                   return (
@@ -251,13 +258,13 @@ const Dashtable = ({
                     </Td>
                   );
                 })}
-                {isDetail && (
+                {/* {isDetail && (
                   <Td>
                     <Text to={`${detailPath}/${data[detailKey]}`} as={Link}>
                       Detail
                     </Text>
                   </Td>
-                )}
+                )} */}
               </Tr>
             ))}
           </Tbody>

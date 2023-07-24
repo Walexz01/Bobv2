@@ -6,6 +6,7 @@ interface Props {
   first?: boolean;
   value: string;
   setvalue: (e: string) => void;
+  isRequired?: boolean;
 }
 
 const Modelinput = ({
@@ -15,11 +16,13 @@ const Modelinput = ({
   setvalue,
   first = false,
   type = "text",
+  isRequired = true,
 }: Props) => {
   return (
     <FormControl mt={first ? 0 : 4}>
       <FormLabel>{label}</FormLabel>
       <Input
+        required={isRequired}
         value={value}
         onChange={(e) => setvalue(e.target.value)}
         type={type}

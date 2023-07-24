@@ -131,6 +131,9 @@ const AllOrders = () => {
       rankBy={rankBy}
       totalPages={Data.totalPages}
       isLoading={isLoading}
+      isDetail
+      detailPath="customers"
+      detailKey="id"
     />
   );
 };
