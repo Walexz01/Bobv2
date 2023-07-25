@@ -15,7 +15,7 @@ import ModelContainer from "../../components/Dashboard/ModelContainer";
 import Modelinput from "../../components/Dashboard/Modelinput";
 import { axiosInstance } from "../../services/api-client";
 
-interface NewProduct {
+export interface NewProduct {
   name: string;
   price: string;
   quantity: string;

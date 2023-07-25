@@ -109,9 +109,47 @@ router.post("/", async (req, res) => {
       .promise()
       .query(query, [name, quantity, description, price]);
     res.status(201).json("Product added");
-  } catch (error) {
+  } catch (err) {
     console.log("Error adding data:", err);
     res.status(500).json({ error: "An error occurred while adding data" });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const query =
+    "SELECT name,id,description,quantity_in_stock AS quantity,unit_price AS price FROM products WHERE id = ?";
+  try {
+    const [[result]] = await connection.promise().query(query, [id]);
+    res.status(200).json(result);
+  } catch (err) {
+    console.log("Error adding data:", err);
+    res.status(500).json({ error: "An error occurred while fetching data" });
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { price, description, quantity } = req.body;
+  const query = `UPDATE  products SET description = ?,quantity_in_stock = ?,unit_price = ? WHERE id = ?`;
+  try {
+    await connection.promise().query(query, [description, quantity, price, id]);
+    res.json("update successfully");
+  } catch (err) {
+    console.log("Error adding data:", err);
+    res.status(500).json({ error: "An error occurred while updating data" });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  const query = `DELETE FROM products WHERE id = ?`;
+  try {
+    await connection.promise().query(query, [id]);
+    res.json("deleted");
+  } catch (err) {
+    console.log("Error adding data:", err);
+    res.status(500).json({ error: "An error occurred while deleting data" });
   }
 });
 

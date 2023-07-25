@@ -7,6 +7,7 @@ interface Props {
   value: string;
   setvalue: (e: string) => void;
   isRequired?: boolean;
+  readonly?: boolean;
 }
 
 const Modelinput = ({
@@ -17,6 +18,7 @@ const Modelinput = ({
   first = false,
   type = "text",
   isRequired = true,
+  readonly = false,
 }: Props) => {
   return (
     <FormControl mt={first ? 0 : 4}>
@@ -27,6 +29,7 @@ const Modelinput = ({
         onChange={(e) => setvalue(e.target.value)}
         type={type}
         placeholder={placeholder}
+        readOnly={readonly}
       />
     </FormControl>
   );

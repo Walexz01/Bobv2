@@ -14,17 +14,26 @@ import {
   Menu,
   MenuItem,
   MenuList,
+  IconButton,
 } from "@chakra-ui/react";
 import ResponsivePagination from "react-responsive-pagination";
 import { BiSolidDownArrow } from "react-icons/bi";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 import "react-responsive-pagination/themes/classic.css";
 import { Link, useNavigate } from "react-router-dom";
 import Searchinput from "./Searchinput";
 import Skeletontable from "./feedback/Skeletontable";
+import { IconType } from "react-icons";
 export interface sortType {
   label: string;
   value: string;
+}
+export interface moreMenuType {
+  label: string;
+  Icon: IconType;
+  onclick: (e: any) => void;
+  color?: string;
 }
 
 interface Prop {
@@ -50,6 +59,8 @@ interface Prop {
   setRankBy?: (e: sortType) => void;
   sortArray?: sortType[];
   isLoading?: boolean;
+  isMore?: boolean;
+  moreMenu?: moreMenuType[];
 }
 const Dashtable = ({
   heading,
@@ -63,6 +74,7 @@ const Dashtable = ({
   setRankBy,
   setSearch,
   isLoading,
+  isMore = false,
   searchInput = "",
   currentPage = 1,
   isPag = false,
@@ -70,6 +82,7 @@ const Dashtable = ({
   detailKey = "",
   isDetail = false,
   isSort = false,
+  moreMenu,
   isSearchable = false,
   sortBy = { label: "", value: "" },
   rankBy = { label: "", value: "" },
@@ -258,13 +271,33 @@ const Dashtable = ({
                     </Td>
                   );
                 })}
-                {/* {isDetail && (
+                {isMore && (
                   <Td>
-                    <Text to={`${detailPath}/${data[detailKey]}`} as={Link}>
-                      Detail
-                    </Text>
+                    <Menu>
+                      <MenuButton
+                        as={IconButton}
+                        border={"none"}
+                        aria-label="Options"
+                        icon={<BsThreeDotsVertical />}
+                        variant="outline"
+                      />
+                      <MenuList>
+                        {moreMenu?.map(
+                          ({ Icon, label, onclick, color }, index) => (
+                            <MenuItem
+                              key={index}
+                              onClick={() => onclick(data["id"])}
+                              icon={<Icon />}
+                              color={color ? color : ""}
+                            >
+                              {label}
+                            </MenuItem>
+                          )
+                        )}
+                      </MenuList>
+                    </Menu>
                   </Td>
-                )} */}
+                )}
               </Tr>
             ))}
           </Tbody>
