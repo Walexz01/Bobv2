@@ -148,7 +148,7 @@ router.delete("/:id", async (req, res) => {
     await connection.promise().query(query, [id]);
     res.json("deleted");
   } catch (err) {
-    console.log("Error adding data:", err);
+    console.error("Error adding data:", err);
     res.status(500).json({ error: "An error occurred while deleting data" });
   }
 });

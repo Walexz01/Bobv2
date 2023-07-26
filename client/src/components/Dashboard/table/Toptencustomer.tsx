@@ -41,7 +41,7 @@ const Toptencustomer = () => {
       heading="Top 10 Customers"
       tHead={tHead}
       data={body}
-      detailPath="/dash/customers"
+      detailPath="/dash/orders/list"
       detailKey="id"
       removeKeys={removekeys}
       isLoading={isLoading}

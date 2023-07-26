@@ -104,7 +104,7 @@ router.post("/", async (req, res) => {
       res.status(201).json("customer created");
     }
   } catch (err) {
-    console.log("Error adding data:", err);
+    console.error("Error adding data:", err);
     res.status(500).json({ error: "An error occurred while adding data" });
   }
 });

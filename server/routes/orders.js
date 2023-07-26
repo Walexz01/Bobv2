@@ -4,11 +4,11 @@ const { getPagination } = require("../controller/pagination");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const { search, rank, sort, page, size } = req.query;
+  const { search, rank, sort, page, size, id } = req.query;
   const currentPage = page ? page - 1 : 0;
 
   try {
-    let query = `SELECT 
+    let q = `SELECT 
     o.id,
     c.customer_name,
     o.total_amount,
@@ -25,8 +25,7 @@ router.get("/", async (req, res) => {
     JOIN users u
     ON u.id = o.user_id
     `;
-
-    let countquery = `SELECT 
+    let cq = `SELECT 
     count(o.id) AS count,
     c.customer_name,
     o.total_amount,
@@ -43,11 +42,33 @@ router.get("/", async (req, res) => {
     JOIN users u
     ON u.id = o.user_id
     `;
+
+    let query = q;
+    let countquery = cq;
     let countparams = [];
-
-    if (search) {
+    let length;
+    if (id) {
+      let [[len]] = await connection
+        .promise()
+        .query(cq + `where c.id = ?`, [id]);
+      length = len.count;
+    }
+    if (id && search) {
+      countquery += ` WHERE c.id = ? AND (o.id LIKE ? OR c.customer_name LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?) `;
+      countparams.push(
+        `${id}`,
+        `%${search}%`,
+        `%${search}%`,
+        `%${search}%`,
+        `%${search}%`,
+        `%${search}%`,
+        `%${search}%`
+      );
+    } else if (id) {
+      countquery += ` WHERE c.id = ? `;
+      countparams.push(`${id}`);
+    } else if (search) {
       countquery += ` WHERE o.id LIKE ? OR c.customer_name LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?`;
-
       countparams.push(
         `%${search}%`,
         `%${search}%`,
@@ -69,10 +90,22 @@ router.get("/", async (req, res) => {
       size,
       count
     );
-
     let queryParams = [];
 
-    if (search) {
+    if (id && search) {
+      query += ` WHERE c.id = ? AND (o.id LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?)`;
+      queryParams.push(
+        `${id}`,
+        `%${search}%`,
+        `%${search}%`,
+        `%${search}%`,
+        `%${search}%`,
+        `%${search}%`
+      );
+    } else if (id) {
+      query += ` WHERE c.id = ?`;
+      queryParams.push(`${id}`);
+    } else if (search) {
       query += ` WHERE o.id LIKE ? OR c.customer_name LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?`;
 
       queryParams.push(
@@ -102,6 +135,7 @@ router.get("/", async (req, res) => {
       totalPages,
       currentPage,
       results: result,
+      length: length,
     });
   } catch (err) {
     console.error("Error fetching data:", err);
