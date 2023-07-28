@@ -206,7 +206,9 @@ const AllProduct = () => {
       });
       setAlertIsSubmitting(false);
       alertClose();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     getProducts();

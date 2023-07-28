@@ -4,7 +4,7 @@ const { getPagination } = require("../controller/pagination");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const { search, rank, sort, page, size, id } = req.query;
+  const { search, rank, sort, page, size, name } = req.query;
   const currentPage = page ? page - 1 : 0;
 
   try {
@@ -47,16 +47,17 @@ router.get("/", async (req, res) => {
     let countquery = cq;
     let countparams = [];
     let length;
-    if (id) {
+    if (name) {
       let [[len]] = await connection
         .promise()
-        .query(cq + `where c.id = ?`, [id]);
+        .query(cq + `where c.customer_name = ?`, [name]);
       length = len.count;
     }
-    if (id && search) {
-      countquery += ` WHERE c.id = ? AND (o.id LIKE ? OR c.customer_name LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?) `;
+
+    if (name && search) {
+      countquery += ` WHERE c.customer_name = ? AND (o.id LIKE ? OR c.customer_name LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?) `;
       countparams.push(
-        `${id}`,
+        `${name}`,
         `%${search}%`,
         `%${search}%`,
         `%${search}%`,
@@ -64,9 +65,9 @@ router.get("/", async (req, res) => {
         `%${search}%`,
         `%${search}%`
       );
-    } else if (id) {
-      countquery += ` WHERE c.id = ? `;
-      countparams.push(`${id}`);
+    } else if (name) {
+      countquery += ` WHERE c.customer_name = ? `;
+      countparams.push(`${name}`);
     } else if (search) {
       countquery += ` WHERE o.id LIKE ? OR c.customer_name LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?`;
       countparams.push(
@@ -92,19 +93,19 @@ router.get("/", async (req, res) => {
     );
     let queryParams = [];
 
-    if (id && search) {
-      query += ` WHERE c.id = ? AND (o.id LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?)`;
+    if (name && search) {
+      query += ` WHERE c.customer_name = ? AND (o.id LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?)`;
       queryParams.push(
-        `${id}`,
+        `${name}`,
         `%${search}%`,
         `%${search}%`,
         `%${search}%`,
         `%${search}%`,
         `%${search}%`
       );
-    } else if (id) {
-      query += ` WHERE c.id = ?`;
-      queryParams.push(`${id}`);
+    } else if (name) {
+      query += ` WHERE c.customer_name = ?`;
+      queryParams.push(`${name}`);
     } else if (search) {
       query += ` WHERE o.id LIKE ? OR c.customer_name LIKE ? OR o.order_date LIKE ? OR o.total_amount LIKE ? OR u.user_name LIKE ? OR s.name LIKE ?`;
 
@@ -140,6 +141,57 @@ router.get("/", async (req, res) => {
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({ error: "An error occurred while fetching data" });
+  }
+});
+
+router.get("/items/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const query = `SELECT 
+    order_id,
+    product_id,
+    p.name AS item_name,
+    op.unit_price,
+    quantity,
+    (quantity * op.unit_price) AS total_cost,
+    customer_id,
+    DATE_FORMAT( order_date, '%r') AS order_time,
+    DATE_FORMAT( order_date, '%Y-%m-%d') AS order_date,
+    total_amount,
+    c.customer_name,
+    s.name AS status_name,
+    u.user_name
+FROM
+    order_products op
+        JOIN
+    orders o ON order_id = o.id
+        JOIN
+    products p ON product_id = p.id
+        JOIN
+    customers c ON c.id = o.customer_id
+        JOIN
+    status s ON status_id = s.id
+        JOIN
+    users u ON u.id = user_id
+    WHERE order_id = ?`;
+    const [result] = await connection.promise().query(query, [id]);
+    res.json(result);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({ error: "An error occurred while fetching data" });
+  }
+});
+
+router.put("/reject/:id", async (req, res) => {
+  const { id } = req.params;
+  const query = `UPDATE orders o SET o.status_id =  ? WHERE o.id = ?`;
+  const status_id = 5;
+  try {
+    await connection.promise().query(query, [status_id, id]);
+    res.json("Order canceled");
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({ error: "An error occurred while updating data" });
   }
 });
 

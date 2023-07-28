@@ -132,7 +132,7 @@ const AllOrders = () => {
       totalPages={Data.totalPages}
       isLoading={isLoading}
       isDetail
-      detailPath="customers"
+      detailPath="items"
       detailKey="id"
     />
   );

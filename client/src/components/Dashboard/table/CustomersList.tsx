@@ -111,6 +111,9 @@ const CustomersList = () => {
         rankBy={rankBy}
         totalPages={Data.totalPages}
         isLoading={isLoading}
+        isDetail
+        detailPath="/dash/orders/list"
+        detailKey="customer_name"
       />
     </>
   );

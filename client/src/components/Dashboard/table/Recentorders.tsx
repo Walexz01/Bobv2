@@ -48,7 +48,7 @@ const Recentorders = () => {
       data={tbody}
       path="/dash/orders"
       isDetail
-      detailPath="/dash/order"
+      detailPath="/dash/orders/items"
       detailKey="id"
       isLoading={isLoading}
       removeKeys={removekeys}

@@ -121,4 +121,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { method_name, amount } = req.body;
+
+  try {
+    let [[method_id]] = await connection
+      .promise()
+      .query(`SELECT id FROM payment_methods WHERE name = ?`, [method_name]);
+    let method = method_id.id;
+    const query = `INSERT INTO payments(order_id, method_id, amount) VALUES(?, ?, ?)`;
+    await connection.promise().query(query, [id, method, amount]);
+    console.log([id, method, amount]);
+
+    res.json("payment successful");
+  } catch (err) {
+    console.error("Error adding data:", err);
+    res.status(500).json({ error: "An error occurred while adding data" });
+  }
+});
+
 module.exports = router;

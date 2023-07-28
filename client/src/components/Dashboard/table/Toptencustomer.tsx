@@ -42,7 +42,7 @@ const Toptencustomer = () => {
       tHead={tHead}
       data={body}
       detailPath="/dash/orders/list"
-      detailKey="id"
+      detailKey="customer_name"
       removeKeys={removekeys}
       isLoading={isLoading}
     />

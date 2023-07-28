@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import ListHeader from "../../components/Dashboard/ListHeader";
 
 const OrderList = () => {
-  const { id } = useParams();
+  const { name } = useParams();
 
   const [currentPage, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
@@ -69,7 +69,7 @@ const OrderList = () => {
     },
   ];
   const thead = isSmallerThan480
-    ? ["Order id", "Total amount", "status"]
+    ? ["Order id", "Total ($)", "status"]
     : isSmallerThan540
     ? ["Order id", "Customer Name", "Total amount", "status"]
     : isSmallerThan630
@@ -102,10 +102,10 @@ const OrderList = () => {
         params: {
           search: searchValue,
           page: currentPage,
-          size: 10,
+          size: 20,
           sort: sortBy.value,
           rank: rankBy.value,
-          id: id,
+          name: name,
         },
       });
       setdata(result.data);
@@ -117,11 +117,10 @@ const OrderList = () => {
 
   useEffect(() => {
     getOrders();
-  }, [id, rankBy, sortBy, searchValue, currentPage]);
+  }, [name, rankBy, sortBy, searchValue, currentPage]);
 
   const listDetailObj = {
-    Id: id,
-    Name: tbody[0]?.customer_name,
+    Name: name,
     "Total Orders": Data?.length,
   };
 
@@ -148,7 +147,7 @@ const OrderList = () => {
           totalPages={Data.totalPages}
           isLoading={isLoading}
           isDetail
-          detailPath="customers"
+          detailPath="/dash/orders/items"
           detailKey="id"
         />
       </Box>

@@ -15,6 +15,7 @@ import {
   MenuItem,
   MenuList,
   IconButton,
+  Tfoot,
 } from "@chakra-ui/react";
 import ResponsivePagination from "react-responsive-pagination";
 import { BiSolidDownArrow } from "react-icons/bi";
@@ -61,6 +62,7 @@ interface Prop {
   isLoading?: boolean;
   isMore?: boolean;
   moreMenu?: moreMenuType[];
+  total?: number;
 }
 const Dashtable = ({
   heading,
@@ -68,7 +70,7 @@ const Dashtable = ({
   data,
   path,
   detailPath,
-  removeKeys,
+  removeKeys = [""],
   setcurrentPage,
   setSortBy,
   setRankBy,
@@ -87,6 +89,7 @@ const Dashtable = ({
   sortBy = { label: "", value: "" },
   rankBy = { label: "", value: "" },
   sortArray = [],
+  total,
 }: Prop) => {
   const bg = useColorModeValue("white", "#252944");
   const border = useColorModeValue("gray", "white");
@@ -301,6 +304,16 @@ const Dashtable = ({
               </Tr>
             ))}
           </Tbody>
+        )}
+        {total && (
+          <Tfoot>
+            <Tr>
+              <th>Total</th>
+              <th colSpan={keyarray.length - 2} align="right">
+                ${total}
+              </th>
+            </Tr>
+          </Tfoot>
         )}
       </Table>
       {isLoading && <Skeletontable />}

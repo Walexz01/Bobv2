@@ -19,6 +19,7 @@ interface Props {
   handleDelete: () => void;
   isLoaded: boolean;
   isSubmitting: boolean;
+  action?: string;
 }
 const Alert = ({
   isOpen,
@@ -28,6 +29,7 @@ const Alert = ({
   handleDelete,
   isLoaded,
   isSubmitting,
+  action = "Delete",
 }: Props) => {
   const cancelRef = React.useRef(null);
   return (
@@ -54,7 +56,7 @@ const Alert = ({
                     Cancel
                   </Button>
                   <Button colorScheme="red" onClick={handleDelete} ml={3}>
-                    Delete
+                    {action}
                     {isSubmitting && <Spinner ml={"5px"} size={"sm"} />}
                   </Button>
                 </AlertDialogFooter>

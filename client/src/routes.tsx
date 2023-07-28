@@ -10,6 +10,7 @@ import Sales from "./pages/Dashboard/Sales";
 import Landing from "./layout/Landing";
 import About from "./components/Landing/About";
 import OrderList from "./pages/Dashboard/OrderList";
+import ItemList from "./pages/Dashboard/ItemList";
 
 const routes = createBrowserRouter([
   {
@@ -39,8 +40,12 @@ const routes = createBrowserRouter([
         element: <Orders />,
       },
       {
-        path: "orders/list/:id",
+        path: "orders/list/:name",
         element: <OrderList />,
+      },
+      {
+        path: "orders/items/:id",
+        element: <ItemList />,
       },
       {
         path: "sales",
