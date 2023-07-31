@@ -195,4 +195,90 @@ router.put("/reject/:id", async (req, res) => {
   }
 });
 
+router.get("/checkuser", async (req, res) => {
+  const { customer_name } = req.query;
+  try {
+    await connection.promise().beginTransaction();
+
+    const [userRows] = await connection
+      .promise()
+      .query("SELECT * FROM customers WHERE customer_name = ?", [
+        customer_name,
+      ]);
+
+    await connection.promise().commit();
+
+    if (userRows.length > 0) {
+      return res.status(200).json(userRows);
+    } else {
+      return res.status(404).json({ message: "Customer not found!" });
+    }
+  } catch (error) {
+    await connection.promise().rollback();
+    console.error("Transaction failed:", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while checking user existence." });
+  }
+});
+
+router.post("/createOrder", async (req, res) => {
+  const { id, products } = req.body;
+  const status_name = "pending";
+
+  let [[status_id]] = await connection.promise().query(
+    `SELECT s.id 
+                         FROM status s 
+                         WHERE  s.name = ?`,
+    [status_name]
+  );
+  status_id = status_id.id;
+
+  const staff_name = "walexz";
+
+  let [[staff_id]] = await connection.promise().query(
+    `SELECT u.id
+                     FROM  users u
+                     WHERE u.user_name = ?`,
+    [staff_name]
+  );
+  staff_id = staff_id.id;
+
+  try {
+    await connection.promise().beginTransaction();
+
+    // query for adding order to the order table
+    const isertOrder = `
+    INSERT INTO orders(customer_id,status_id,user_id)
+    VALUES(?,?,?)`;
+    const [result] = await connection
+      .promise()
+      .query(isertOrder, [id, status_id, staff_id]);
+    let orderId = result.insertId;
+
+    // query for adding product to the order
+    const insertOrderItemsQuery = `INSERT INTO order_products(order_id,product_id,quantity,unit_price)
+    VALUES(?,?,?,?)`;
+
+    for (const product of products) {
+      await connection
+        .promise()
+        .query(insertOrderItemsQuery, [
+          orderId,
+          product.id,
+          product.quantity,
+          product.price,
+        ]);
+    }
+    await connection.promise().commit();
+    return res.status(200).json({ message: "Order created successfully!" });
+  } catch (error) {
+    await connection.promise().rollback();
+    console.error("Transaction failed:", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while creating the order." });
+  }
+});
+
 module.exports = router;

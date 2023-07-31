@@ -15,7 +15,7 @@ interface Props {
   onClose: () => void;
   isLoaded: boolean;
   children: ReactNode;
-  modelHeader: string;
+  modelHeader?: string;
 }
 const ModelContainer = ({
   isOpen,

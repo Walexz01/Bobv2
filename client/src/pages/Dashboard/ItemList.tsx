@@ -4,7 +4,6 @@ import {
   HStack,
   Heading,
   ModalBody,
-  ModalFooter,
   Spinner,
   Stack,
   StackDivider,
@@ -235,8 +234,6 @@ const ItemList = () => {
             </Box>
           </Stack>
         </ModalBody>
-
-        <ModalFooter></ModalFooter>
       </ModelContainer>
 
       <Alert

@@ -11,6 +11,7 @@ import Landing from "./layout/Landing";
 import About from "./components/Landing/About";
 import OrderList from "./pages/Dashboard/OrderList";
 import ItemList from "./pages/Dashboard/ItemList";
+import CreateOrder from "./pages/Dashboard/CreateOrder";
 
 const routes = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const routes = createBrowserRouter([
       {
         path: "orders/items/:id",
         element: <ItemList />,
+      },
+      {
+        path: "orders/new/:id",
+        element: <CreateOrder />,
       },
       {
         path: "sales",

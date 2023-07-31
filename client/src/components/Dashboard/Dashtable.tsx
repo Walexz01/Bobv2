@@ -89,7 +89,7 @@ const Dashtable = ({
   sortBy = { label: "", value: "" },
   rankBy = { label: "", value: "" },
   sortArray = [],
-  total,
+  total = 0,
 }: Prop) => {
   const bg = useColorModeValue("white", "#252944");
   const border = useColorModeValue("gray", "white");
@@ -305,7 +305,7 @@ const Dashtable = ({
             ))}
           </Tbody>
         )}
-        {total && (
+        {total >= 0 ? (
           <Tfoot>
             <Tr>
               <th>Total</th>
@@ -314,7 +314,7 @@ const Dashtable = ({
               </th>
             </Tr>
           </Tfoot>
-        )}
+        ) : null}
       </Table>
       {isLoading && <Skeletontable />}
       {isPag && totalPages && totalPages > 1 ? (
