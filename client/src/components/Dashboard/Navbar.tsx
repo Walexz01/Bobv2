@@ -30,7 +30,7 @@ const Navbar = () => {
       gap={"1rem"}
     >
       <Show above="xl">
-        <Box as={Link} to={"/"}>
+        <Box as={Link} to={"/dash/home"}>
           <Image
             mx={"auto"}
             alignSelf={"center"}

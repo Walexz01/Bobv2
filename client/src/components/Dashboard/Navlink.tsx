@@ -2,7 +2,7 @@ import { Link, Show, useColorModeValue } from "@chakra-ui/react";
 import { NavLink as ReactLink } from "react-router-dom";
 import { Link as Props } from "../../data";
 
-const Navlink = ({ Icon, name, path, show = "xl" }: Props) => {
+const Navlink = ({ Icon, name, path, show = "xl", handleClick }: Props) => {
   const color = useColorModeValue("blackAlpha.800", "#646887");
 
   return (
@@ -20,6 +20,7 @@ const Navlink = ({ Icon, name, path, show = "xl" }: Props) => {
       color={color}
       as={ReactLink}
       to={path}
+      onClick={handleClick ? () => handleClick() : () => {}}
     >
       <Icon size={"1.4rem"} />
       <Show above={show}> {name}</Show>

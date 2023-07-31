@@ -26,7 +26,6 @@
 .landing{
     color: var(--color-gray-200);
     background-color: var(--color-gray-600);
-    /* height: 200vh; */
 }
 .container{
     width: var(--container-width-lg);
@@ -147,7 +146,7 @@ img{
     position: absolute;
     content:  url('./assets/text_bg.svg');
     z-index: -1;
-    left: 0;
+    left: -10px;
     top: 5px;
 
 }
@@ -203,6 +202,86 @@ img{
 
     width: 300px;
 }
+
+/* ================================================= feature ============================================== */
+.feature_container{
+    text-align: center;
+}
+.cards{
+    display: grid;
+    gap: 2rem;
+    padding-top: 3rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-gray-500);
+    padding: 3rem 2rem;
+    text-align: center;
+    gap: .5rem;
+    border-radius: 0 3rem;
+    border: 1px solid transparent;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.card h2{
+    color: white;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+.card p{
+    font-size: 1rem;
+}
+.card:hover{
+    background: none;
+    border: 1px solid var(--color-gray-100);
+
+}
+.bg_sect_head::before{
+    left: -30px;
+
+}
+.card img{
+    width: 50px;
+}
+
+/* ===================================== trainers__section ====================== */
+.trainers_container{
+    text-align: center;
+
+}
+.trainers_cards{
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.trainers_card{
+    padding: 10px;
+}
+.trainers_card img{
+    width: 100%;
+    border-radius: 0 3rem;
+}
+.details{
+padding: 1rem 0 ;    
+display: flex;
+flex-direction: column;
+
+}
+.trainer_links{
+    padding-top: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 10px;
+    font-size: 1.3rem;
+}
+.trainer_link{
+    background-color: var(--color-gray-600);
+    padding: 6px;
+    border-radius: 40%;
+}
 /*  ================================================== media query for 1024px ================================== */
 @media screen and (max-width: 1024px) {
     .container{
@@ -247,6 +326,16 @@ img{
 }
 .hero_img_con{
     width: 250px;
+}
+
+/* ================================================= feature ============================================== */
+.cards{
+    grid-template-columns: 1fr 1fr;
+}
+
+/* ===================================== trainers__section ====================== */
+.trainers_cards{
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 }
@@ -300,6 +389,12 @@ img{
     .show_nav{
         display: block;
     }
+
+    /* ===================================== trainers__section ====================== */
+.trainers_cards{
+    grid-template-columns: 1fr 1fr ;
+}
+
     
     
 }
@@ -344,7 +439,6 @@ img{
 .hero_img_con{
     width: 250px;
 }
-
 
 }
 
@@ -398,6 +492,16 @@ img{
 .hero_img_con{
 
     width: 200px;
+}
+
+/* ================================================= feature ============================================== */
+.cards{
+    grid-template-columns: 1fr ;
+}
+
+/* ===================================== trainers__section ====================== */
+.trainers_cards{
+    grid-template-columns: 1fr ;
 }
 
 }

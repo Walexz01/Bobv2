@@ -33,6 +33,7 @@ const SmallNav = ({ isOpen, onClose }: Props) => {
                   Icon={Icon}
                   name={name}
                   path={path}
+                  handleClick={onClose}
                 />
               ))}
             </VStack>

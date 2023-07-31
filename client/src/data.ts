@@ -10,7 +10,8 @@ export interface Link{
     name:string,
     path:string,
     Icon:IconType
-    show?:string
+    show?:string,
+    handleClick?:()=>void
 
 }
 
