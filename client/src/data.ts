@@ -10,6 +10,7 @@ export interface Link{
     name:string,
     path:string,
     Icon:IconType
+    show?:string
 
 }
 

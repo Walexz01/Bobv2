@@ -145,7 +145,6 @@ const CreateOrder = () => {
     }
   };
 
-  console.log(OrderProducts);
   return (
     <>
       <Pageheader
@@ -240,6 +239,7 @@ const CreateOrder = () => {
             data={OrderProducts}
             total={totalCost}
             isMore
+            isTotaled
             moreMenu={[
               {
                 label: "Remove",

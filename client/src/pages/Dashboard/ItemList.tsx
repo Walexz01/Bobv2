@@ -176,7 +176,6 @@ const ItemList = () => {
       console.error(error);
     }
   };
-  console.log(input);
 
   return (
     <>
@@ -260,6 +259,7 @@ const ItemList = () => {
           tHead={tHead}
           data={body}
           removeKeys={removeKeys}
+          isTotaled
           total={first?.total_amount}
         />
       </Box>

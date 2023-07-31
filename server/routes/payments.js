@@ -132,7 +132,6 @@ router.post("/:id", async (req, res) => {
     let method = method_id.id;
     const query = `INSERT INTO payments(order_id, method_id, amount) VALUES(?, ?, ?)`;
     await connection.promise().query(query, [id, method, amount]);
-    console.log([id, method, amount]);
 
     res.json("payment successful");
   } catch (err) {

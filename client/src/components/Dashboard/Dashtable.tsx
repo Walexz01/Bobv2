@@ -63,6 +63,7 @@ interface Prop {
   isMore?: boolean;
   moreMenu?: moreMenuType[];
   total?: number;
+  isTotaled?: boolean;
 }
 const Dashtable = ({
   heading,
@@ -90,6 +91,7 @@ const Dashtable = ({
   rankBy = { label: "", value: "" },
   sortArray = [],
   total = 0,
+  isTotaled = false,
 }: Prop) => {
   const bg = useColorModeValue("white", "#252944");
   const border = useColorModeValue("gray", "white");
@@ -305,7 +307,7 @@ const Dashtable = ({
             ))}
           </Tbody>
         )}
-        {total >= 0 ? (
+        {isTotaled && total >= 0 ? (
           <Tfoot>
             <Tr>
               <th>Total</th>

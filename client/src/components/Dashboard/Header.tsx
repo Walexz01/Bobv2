@@ -16,15 +16,18 @@ import {
   useColorModeValue,
   Hide,
   Image,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Logo from "../../assets/logo.png";
 import lightLogo from "../../assets/lightLogo.png";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
+import { FaBars } from "react-icons/fa";
 import { VscBellDot } from "react-icons/vsc";
 import { BsMoon, BsFillSunFill } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import Searchinput from "./Searchinput";
 import { useState } from "react";
+import SmallNav from "./SmallNav";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -34,6 +37,7 @@ const Header = () => {
   const border = useColorModeValue("gray", "white");
   const color = useColorModeValue("blue.200", "#d0d3e7");
   const btnBg = useColorModeValue("gray.100", "#646887");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box
@@ -85,21 +89,24 @@ const Header = () => {
         </Hide>
         <Box
           display={"flex"}
-          gap={"1rem"}
+          gap={{ base: ".1rem", sm: "1rem" }}
           alignItems={"center"}
           justifyContent={"flex-end"}
           flex={1}
         >
-          <Box
-            cursor={"pointer"}
-            border={"1px solid gray"}
-            borderColor={"gray.400"}
-            p={{ xl: "10px", base: "7px" }}
-            borderRadius={"10px"}
-            _hover={{ bg: btnBg }}
-          >
-            <VscBellDot size={"1.4rem"} />
-          </Box>
+          <Hide below="sm">
+            <Box
+              cursor={"pointer"}
+              border={"1px solid gray"}
+              borderColor={"gray.400"}
+              p={{ xl: "10px", base: "7px" }}
+              borderRadius={"10px"}
+              _hover={{ bg: btnBg }}
+            >
+              <VscBellDot size={"1.4rem"} />
+            </Box>
+          </Hide>
+
           <Box
             cursor={"pointer"}
             border={"1px solid gray"}
@@ -130,7 +137,7 @@ const Header = () => {
                     <Avatar
                       bg={"teal.500"}
                       icon={<AiOutlineUser fontSize="1.1rem" />}
-                      size={"sm"}
+                      size={{ base: "xs", sm: "sm" }}
                     />
                     <Show above="lg">
                       <Flex flexDir={"column"} gap={0} textAlign={"left"}>
@@ -164,8 +171,14 @@ const Header = () => {
               </>
             )}
           </Menu>
+          <Show below="lg">
+            <Box onClick={onOpen}>
+              <FaBars fontSize={"1.3rem"} />
+            </Box>
+          </Show>
         </Box>
       </Flex>
+      <SmallNav isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };
