@@ -7,6 +7,11 @@ import community from './assets/community.png'
 import trainer1 from './assets/trainer1.jpg'
 import trainer2 from './assets/trainer2.jpg'
 import trainer3 from './assets/trainer3.jpg'
+// images for Trainers section
+import why1 from './assets/fitness.png'
+import why2 from './assets/bag.png'
+import why3 from './assets/modern equip.png'
+import why4 from './assets/bottle.png'
 
 import {FaFacebookF} from 'react-icons/fa'
 import {BsTwitter} from 'react-icons/bs'
@@ -53,7 +58,7 @@ interface header_hero{
 export const Header_hero:header_hero= {
     bg_text:'#100DaysOfWorkOut',
     htext:"Join the Legends Of The Fitness World",
-    des:" Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo cum iusto ex aliquid aut eaque architecto. Expedita consequuntur ullam molestias sapiente omnis, consectetur dolore? Totam animi umque neque? Ratione, autem!"
+    des:"We aims to revolutionize the way you approach fitness. We go beyond just selling products; we offer an immersive experience that combines shopping, training, and community engagement. Embrace the journey to a healthier lifestyle with us and witness the positive impact it can have on your life"
 
 }
 
@@ -174,3 +179,28 @@ export const trainers:Trainer[]=[
 ]
 
 
+
+// Why choose us 
+interface WhyUSList{
+    image : string;
+    text:string
+}
+export const WhyUsList:WhyUSList[]=[
+    {
+        image:why1,
+        text:'Free Fitness Training'
+    },
+    {
+        image:why2,
+        text:'Strength Training Session'
+    },
+    {
+        image:why3,
+        text:'Flexible Weight Training'
+    },
+    {
+        image:why4,
+        text:'Nutritions'
+    },
+
+]

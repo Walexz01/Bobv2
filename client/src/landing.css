@@ -282,6 +282,58 @@ flex-direction: column;
     padding: 6px;
     border-radius: 40%;
 }
+/* ========================= whyus_container ======================= */
+.whyus_container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.whyus_left img{
+    height: 80%;
+    
+}
+.whyus_right_conntent{
+    padding-top: 2rem;
+    width: 80%;
+}
+.whyus_right_conntent h2{
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+}
+.whyus_right_conntent p{
+    font-size: 1.2rem;
+    padding-top: .5rem;
+}
+.whys_list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 1rem 0;
+}
+.why{
+    display: flex;
+    gap: .4rem;
+    align-items: center;
+}
+.why img{
+    width: 60px;
+    background: var(--color-gray-500);
+    padding: 10px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+.why img:hover{
+    background: var(--color-priary);
+
+}
+.why h3{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.whyus_right_conntent button{
+    margin-top: 1rem;
+    font-weight: bold;
+}
 /*  ================================================== media query for 1024px ================================== */
 @media screen and (max-width: 1024px) {
     .container{
@@ -338,11 +390,32 @@ flex-direction: column;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+/* ========================= whyus_container ======================= */
+.whyus_right_conntent{
+    padding-top: 2rem;
+    width: 100%;
+}
+.whyus_right_conntent h2{
+    font-size: 1.6rem;
+}
+.whyus_right_conntent p{
+    font-size: 1rem;
+}
+.why h3{
+    font-size: 1.1rem;
+}
+.why img{
+    width: 50px;
+    padding: 5px;
+}
+
+
 }
 /*  ================================================== media query for 910px ================================== */
 @media screen and (max-width: 910px) {
     .container{
         width: var(--container-width-sm);
+        padding: 0 20px;
     }
     .btn{
         padding: 2px 15px;
@@ -394,7 +467,6 @@ flex-direction: column;
 .trainers_cards{
     grid-template-columns: 1fr 1fr ;
 }
-
     
     
 }
@@ -438,6 +510,33 @@ flex-direction: column;
 }
 .hero_img_con{
     width: 250px;
+}
+
+/* ========================= whyus_container ======================= */
+.whyus_container{
+    grid-template-columns: 1fr ;
+    text-align: center;
+}
+.whyus_left{
+    display: none;
+}
+.whyus_right_conntent{
+    padding-top: 2rem;
+    width: 100%;
+}
+.whyus_right_conntent h2{
+    font-size: 1.7rem;
+    text-align: center;
+}
+.whyus_right_conntent p{
+    font-size: 1.1rem;
+}
+.why img{
+    width: 60px;
+    padding: 10px;
+}
+.why h3{
+    font-size: 1.2rem;
 }
 
 }
@@ -503,5 +602,21 @@ flex-direction: column;
 .trainers_cards{
     grid-template-columns: 1fr ;
 }
+/* ========================= whyus_container ======================= */
+.whyus_right_conntent h2{
+    font-size: 1.5rem;
+}
+.whyus_right_conntent p{
+    font-size: 1rem;
+    
+}
+.whys_list{
+    grid-template-columns: 1fr;
+}
+.why h3{
+    font-size: 1.2rem;
+}
+
+
 
 }
