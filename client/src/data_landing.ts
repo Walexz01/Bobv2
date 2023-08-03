@@ -12,6 +12,14 @@ import why1 from './assets/fitness.png'
 import why2 from './assets/bag.png'
 import why3 from './assets/modern equip.png'
 import why4 from './assets/bottle.png'
+// offer
+import offerLeft from "./assets/offer.jpg";
+// workoutGallery
+import gallery2 from "./assets/gallery2.jpg";
+import gallery1 from "./assets/gallery1.jpg";
+import gallery3 from "./assets/gallery3.jpg";
+
+
 
 import {FaFacebookF} from 'react-icons/fa'
 import {BsTwitter} from 'react-icons/bs'
@@ -203,4 +211,40 @@ export const WhyUsList:WhyUSList[]=[
         text:'Nutritions'
     },
 
+]
+// offer
+export const offer={
+    head:'SPECIAL OFFER THIS SUMMER GET FULL BENEFITS FOR YEAR WITH 20% DISCOUNT.',
+    desc:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur exercitationem amet quas repellendus esse natus.',
+    image:offerLeft
+}
+
+// workout gallery
+
+export const workOutGallery=[
+    gallery1,gallery2,gallery3,gallery3
+] 
+
+// package
+interface packageInter{
+    price:string;
+    head:string
+    benefit:string[]
+}
+export const packages:packageInter[]=[
+    {
+        price:'$59/Month',
+         head:'Body Building Training',
+         benefit:['Get Free WiFi',"Get Free WiFi",'Get Free WiFi',"Get Free WiFi",'Get Free WiFi',"Get Free WiFi",]
+    },
+    {
+        price:'$59/Month',
+         head:'Body Building Training',
+         benefit:['Get Free WiFi',"Get Free WiFi",'Get Free WiFi',"Get Free WiFi",'Get Free WiFi',"Get Free WiFi",]
+    },
+    {
+        price:'$59/Month',
+         head:'Body Building Training',
+         benefit:['Get Free WiFi',"Get Free WiFi",'Get Free WiFi',"Get Free WiFi",'Get Free WiFi',"Get Free WiFi",]
+    },
 ]

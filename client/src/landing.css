@@ -334,6 +334,92 @@ flex-direction: column;
     margin-top: 1rem;
     font-weight: bold;
 }
+/* ===================================== offer ================================= */
+.offer__section{
+    background: var(--color-gray-500);
+
+}
+.offer_container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    place-items: center;
+}
+.offer_left h2{
+    color: white;
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+.offer_left p{
+    font-size: 1.1rem;
+    padding: 1rem 0;
+}
+/* ============================ wo_gallery_container =========================== */
+.wo_gallery_imgs img{
+    filter: grayscale(10);
+
+}
+.wo_gallery_imgs img:hover{
+    transition: var(--transition);
+    filter: grayscale(0);
+
+}
+
+.wo_gallery_container{
+    padding: 4rem 0;
+    text-align: center;
+}
+.wo_gallery_imgs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 3rem ;
+}
+/* ========================= package__section ===================== */
+.package_container{
+    text-align: center;
+}
+.package_container .bg_sect_head::before{
+    left: -10px;
+}
+.prices{
+    padding: 4rem 0 2rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+.price{
+    padding: 0;
+    overflow: hidden;
+    gap: 0;
+    padding-bottom: 1rem;
+}
+.price_tag{
+    /* background-color: red; */
+    background-color: var(--color-priary);
+    padding: 10px;
+    font-size: 1.2rem;
+    color: #fff;
+    width: 100%;
+}
+.price img{
+    width: 100%;
+}
+.price .details{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.details h2{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.details p{
+    font-size: 1.1rem;
+}
+.details .btn{
+    margin-top: 1rem;
+}
+
 /*  ================================================== media query for 1024px ================================== */
 @media screen and (max-width: 1024px) {
     .container{
@@ -538,6 +624,59 @@ flex-direction: column;
 .why h3{
     font-size: 1.2rem;
 }
+/* ===================================== offer ================================= */
+.offer_container{
+    grid-template-columns: 1fr ;
+    text-align: center;
+}
+.offer_left h2{
+    color: white;
+    font-size: 1.5rem;
+}
+.offer_left p{
+    font-size: 1rem;
+}
+.offer_right img{
+    display: none;
+}
+/* ============================ wo_gallery_container =========================== */
+.wo_gallery_imgs img{    
+    filter: grayscale(10);
+
+}
+.wo_gallery_imgs img:hover{
+    transition: var(--transition);
+    filter: grayscale(0);
+
+}
+
+.wo_gallery_container{
+    padding: 4rem 0;
+    text-align: center;
+}
+.wo_gallery_imgs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 3rem ;
+}
+/* ========================= package__section ===================== */
+.package_container .bg_sect_head::before{
+    left: -10px;
+}
+.prices{
+    padding: 4rem 0 2rem 0;
+    grid-template-columns: 1fr 1fr ;
+}
+.price_tag{
+    font-size: 1.1rem;
+}
+.details h2{
+    font-size: 1.1rem;
+}
+.details p{
+    font-size: 1rem;
+}
+
 
 }
 
@@ -617,6 +756,9 @@ flex-direction: column;
     font-size: 1.2rem;
 }
 
-
+/* ========================= package__section ===================== */
+.prices{
+    grid-template-columns: 1fr;
+}
 
 }
