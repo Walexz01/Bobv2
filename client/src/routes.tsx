@@ -12,6 +12,7 @@ import About from "./components/Landing/About";
 import OrderList from "./pages/Dashboard/OrderList";
 import ItemList from "./pages/Dashboard/ItemList";
 import CreateOrder from "./pages/Dashboard/CreateOrder";
+import Seller from "./pages/Dashboard/Seller";
 
 const routes = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const routes = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "workers",
+        element: <Seller />,
       },
     ],
   },

@@ -4,6 +4,7 @@ import {TbExchange} from 'react-icons/tb'
 import {BsBag} from 'react-icons/bs'
 import {BiDollarCircle} from 'react-icons/bi'
 import {SlSocialDropbox} from 'react-icons/sl'
+import {BiUser} from 'react-icons/bi'
 import { IconType } from 'react-icons'
 
 export interface Link{
@@ -45,6 +46,11 @@ export const Links:Link[] = [
         name: "Products",
         path: 'products',
         Icon: SlSocialDropbox
+    },
+    {
+        name: "Worker",
+        path: 'workers',
+        Icon: BiUser
     }
 ]
 

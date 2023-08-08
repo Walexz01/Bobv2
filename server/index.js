@@ -11,6 +11,7 @@ const products = require("./routes/products");
 const sales = require("./routes/sales");
 const payments = require("./routes/payments");
 const orders = require("./routes/orders");
+const users = require("./routes/user");
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/products", products);
 app.use("/api/sales", sales);
 app.use("/api/payments", payments);
 app.use("/api/orders", orders);
+app.use("/api/users", users);
 
 const port = process.env.PORT | 500;
 
