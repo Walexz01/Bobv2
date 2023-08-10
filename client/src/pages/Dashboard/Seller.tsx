@@ -13,9 +13,10 @@ import {
 import Pageheader from "../../components/Dashboard/Pageheader";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../services/api-client";
-import UserCard from "../../components/Landing/UserCard";
+import UserCard, { moreMenuType } from "../../components/Landing/UserCard";
 import ModelContainer from "../../components/Dashboard/ModelContainer";
 import Modelinput from "../../components/Dashboard/Modelinput";
+import { MdOutlineModeEdit } from "react-icons/md";
 
 const Seller = () => {
   const [users, setusers] = useState<any[]>([]);
@@ -55,7 +56,12 @@ const Seller = () => {
       await axiosInstance.post("/users", newUser);
       setusers([
         ...users,
-        { user_name: newUser.name, role: "user", date: Date.now() },
+        {
+          user_name: newUser.name,
+          role: "user",
+          date: Date.now(),
+          id: Math.random(),
+        },
       ]);
       toast({
         title: "Customer created.",
@@ -82,6 +88,14 @@ const Seller = () => {
     }
   };
   const btnBg = useColorModeValue("#126be9", "#e5549a");
+
+  const moreMenu: moreMenuType[] = [
+    {
+      label: "Edit",
+      Icon: MdOutlineModeEdit,
+      onclick: () => {},
+    },
+  ];
 
   return (
     <Box padding={"20px"} display={"flex"} flexDir={"column"} gap={"1rem"}>
@@ -118,10 +132,25 @@ const Seller = () => {
         </form>
       </ModelContainer>
       <Pageheader name="Workers" Label="Add New" handleClick={handleclick} />
-      <Grid templateColumns="repeat(4, 1fr)" gap={6} bgColor={bg}>
+      <Grid
+        templateColumns={{
+          base: "repeat(1, 1fr)",
+          sm: "repeat(2, 1fr)",
+          md: "repeat(3, 1fr)",
+          lg: "repeat(4, 1fr)",
+        }}
+        gap={6}
+        bgColor={bg}
+      >
         {users.map(({ id, user_name, role, date, img }) => (
           <GridItem key={id}>
-            <UserCard img={img} user_name={user_name} role={role} date={date} />
+            <UserCard
+              moreMenu={moreMenu}
+              img={img}
+              user_name={user_name}
+              role={role}
+              date={date}
+            />
           </GridItem>
         ))}
       </Grid>

@@ -1,9 +1,10 @@
 const express = require("express");
 const connection = require("../connection/connection");
 const { getPagination } = require("../controller/pagination");
+const varifyUser = require("../middleware/verify");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", varifyUser, async (req, res) => {
   const { search, rank, sort, page, size } = req.query;
   const currentPage = page ? page - 1 : 0;
 
@@ -121,7 +122,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/:id", async (req, res) => {
+router.post("/:id", varifyUser, async (req, res) => {
   const { id } = req.params;
   const { method_name, amount } = req.body;
 

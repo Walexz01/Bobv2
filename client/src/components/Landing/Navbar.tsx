@@ -20,7 +20,7 @@ const Navbar = () => {
         </ul>
         <div className="shop__show">
           <button className="btn shop_now">
-            <Link to={"/dash/home"}>Shop Now</Link>
+            <Link to={"/login"}>Shop Now</Link>
           </button>
           <div
             className="show_nav"

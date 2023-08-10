@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import Searchinput from "../../components/Dashboard/Searchinput";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "../../services/api-client";
 import ResponsivePagination from "react-responsive-pagination";
@@ -20,6 +20,7 @@ import Dashtable from "../../components/Dashboard/Dashtable";
 import Modelinput from "../../components/Dashboard/Modelinput";
 import { RiDeleteBinFill } from "react-icons/ri";
 import ModelContainer from "../../components/Dashboard/ModelContainer";
+import { AuthContext } from "../../context/Auth";
 
 const CreateOrder = () => {
   interface datain {
@@ -30,6 +31,8 @@ const CreateOrder = () => {
   }
   const bg = useColorModeValue("white", "#252944");
   const [input, setInput] = useState("");
+  const { currentUser } = useContext(AuthContext);
+
   const [currentPage, setCurrentPage] = useState(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [Quantity, setQuantity] = useState("1");
@@ -83,7 +86,8 @@ const CreateOrder = () => {
       total + parseInt(product?.quantity) * parseFloat(product?.price),
     0
   );
-  const handleAdd = () => {
+  const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const productIndex = OrderProducts.findIndex(
       (product) => product.id === clickProdu.id
     );
@@ -100,6 +104,7 @@ const CreateOrder = () => {
         )
       );
     }
+    onClose();
     setQuantity("1");
   };
 
@@ -111,6 +116,7 @@ const CreateOrder = () => {
           await axiosInstance.post("orders/createOrder", {
             id: id,
             products: OrderProducts,
+            staff_name: currentUser?.username,
           });
           setIsSubmitting(false);
           toast({
@@ -154,7 +160,7 @@ const CreateOrder = () => {
         handleClick={handleCreate}
       />
       <ModelContainer isOpen={isOpen} onClose={onClose} isLoaded={false}>
-        <form className="modalform" onSubmit={() => {}}>
+        <form className="modalform" onSubmit={handleAdd}>
           <ModalBody pb={6} width={"100%"}>
             <Modelinput
               label="Quantity"
@@ -168,7 +174,7 @@ const CreateOrder = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button color={"white"} bgColor={btnBg} mr={3} onClick={handleAdd}>
+            <Button type="submit" color={"white"} bgColor={btnBg} mr={3}>
               Add
             </Button>
             <Button onClick={onClose}>Cancel</Button>

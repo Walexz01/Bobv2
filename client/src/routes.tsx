@@ -13,6 +13,7 @@ import OrderList from "./pages/Dashboard/OrderList";
 import ItemList from "./pages/Dashboard/ItemList";
 import CreateOrder from "./pages/Dashboard/CreateOrder";
 import Seller from "./pages/Dashboard/Seller";
+import Login from "./pages/Dashboard/Login";
 
 const routes = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const routes = createBrowserRouter([
         element: <Seller />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 

@@ -1,9 +1,11 @@
 const express = require("express");
 const connection = require("../connection/connection");
 const { getPagination } = require("../controller/pagination");
+const admin = require("../middleware/authorize");
+const varifyUser = require("../middleware/verify");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", varifyUser, async (req, res) => {
   const { search, rank, sort, page, size } = req.query;
   const currentPage = page ? page - 1 : 0;
 
@@ -75,7 +77,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/top", async (req, res) => {
+router.get("/top", varifyUser, async (req, res) => {
   try {
     const query = `SELECT 
     p.id,
@@ -101,7 +103,7 @@ router.get("/top", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", varifyUser, admin, async (req, res) => {
   const { name, price, quantity, description } = req.body;
   const query = `INSERT INTO products(name,quantity_in_stock,description,unit_price) VALUES(?,?,?,?)`;
   try {
@@ -115,7 +117,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", varifyUser, async (req, res) => {
   const { id } = req.params;
   const query =
     "SELECT name,id,description,quantity_in_stock AS quantity,unit_price AS price FROM products WHERE id = ?";
@@ -128,7 +130,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", varifyUser, admin, async (req, res) => {
   const { id } = req.params;
   const { price, description, quantity } = req.body;
   const query = `UPDATE  products SET description = ?,quantity_in_stock = ?,unit_price = ? WHERE id = ?`;
@@ -141,7 +143,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", varifyUser, admin, async (req, res) => {
   const { id } = req.params;
   const query = `DELETE FROM products WHERE id = ?`;
   try {

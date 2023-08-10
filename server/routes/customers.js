@@ -1,9 +1,10 @@
 const express = require("express");
 const connection = require("../connection/connection");
 const { getPagination } = require("../controller/pagination");
+const varifyUser = require("../middleware/verify");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", varifyUser, async (req, res) => {
   const { search, size, page, sort, rank } = req.query;
   const currentPage = page ? page - 1 : 0;
   try {
@@ -68,7 +69,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/top", async (req, res) => {
+router.get("/top", varifyUser, async (req, res) => {
   try {
     const query = `
                 SELECT 
@@ -89,7 +90,7 @@ router.get("/top", async (req, res) => {
     res.status(500).json({ error: "An error occurred while fetching data" });
   }
 });
-router.post("/", async (req, res) => {
+router.post("/", varifyUser, async (req, res) => {
   const { name, address } = req.body;
   const [[isAvailable]] = await connection
     .promise()

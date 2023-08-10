@@ -9,6 +9,11 @@ import {
 } from "@chakra-ui/react";
 import { Links } from "../../data";
 import Navlink from "./Navlink";
+import { BiUser } from "react-icons/bi";
+import { AuthContext } from "../../context/Auth";
+import { useContext } from "react";
+import { SlSocialDropbox } from "react-icons/sl";
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -16,6 +21,7 @@ interface Props {
 
 const SmallNav = ({ isOpen, onClose }: Props) => {
   const bg = useColorModeValue("white", "#141627");
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <>
@@ -36,6 +42,24 @@ const SmallNav = ({ isOpen, onClose }: Props) => {
                   handleClick={onClose}
                 />
               ))}
+              {currentUser?.role === "admin" ? (
+                <>
+                  <Navlink
+                    show=""
+                    Icon={SlSocialDropbox}
+                    name={"Products"}
+                    handleClick={onClose}
+                    path={"products"}
+                  />
+                  <Navlink
+                    show=""
+                    handleClick={onClose}
+                    Icon={BiUser}
+                    name={"Worker"}
+                    path={"workers"}
+                  />
+                </>
+              ) : null}
             </VStack>
           </DrawerBody>
         </DrawerContent>

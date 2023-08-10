@@ -1,9 +1,10 @@
 const express = require("express");
 const connection = require("../connection/connection");
 const { getPagination } = require("../controller/pagination");
+const varifyUser = require("../middleware/verify");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", varifyUser, async (req, res) => {
   const { search, rank, sort, page, size, name } = req.query;
   const currentPage = page ? page - 1 : 0;
 
@@ -144,7 +145,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/items/:id", async (req, res) => {
+router.get("/items/:id", varifyUser, async (req, res) => {
   const { id } = req.params;
   try {
     const query = `SELECT 
@@ -182,7 +183,7 @@ FROM
   }
 });
 
-router.put("/reject/:id", async (req, res) => {
+router.put("/reject/:id", varifyUser, async (req, res) => {
   const { id } = req.params;
   const query = `UPDATE orders o SET o.status_id =  ? WHERE o.id = ?`;
   const status_id = 5;
@@ -195,7 +196,7 @@ router.put("/reject/:id", async (req, res) => {
   }
 });
 
-router.get("/checkuser", async (req, res) => {
+router.get("/checkuser", varifyUser, async (req, res) => {
   const { customer_name } = req.query;
   try {
     await connection.promise().beginTransaction();
@@ -222,8 +223,8 @@ router.get("/checkuser", async (req, res) => {
   }
 });
 
-router.post("/createOrder", async (req, res) => {
-  const { id, products } = req.body;
+router.post("/createOrder", varifyUser, async (req, res) => {
+  const { id, products, staff_name } = req.body;
   const status_name = "pending";
 
   let [[status_id]] = await connection.promise().query(
@@ -233,8 +234,6 @@ router.post("/createOrder", async (req, res) => {
     [status_name]
   );
   status_id = status_id.id;
-
-  const staff_name = "walexz";
 
   let [[staff_id]] = await connection.promise().query(
     `SELECT u.id

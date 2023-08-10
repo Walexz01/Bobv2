@@ -18,6 +18,7 @@ import {
   Image,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useContext, useState } from "react";
 import Logo from "../../assets/logo.png";
 import lightLogo from "../../assets/lightLogo.png";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
@@ -26,8 +27,10 @@ import { VscBellDot } from "react-icons/vsc";
 import { BsMoon, BsFillSunFill } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import Searchinput from "./Searchinput";
-import { useState } from "react";
 import SmallNav from "./SmallNav";
+import { AuthContext } from "../../context/Auth";
+import { axiosInstance } from "../../services/api-client";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -38,7 +41,19 @@ const Header = () => {
   const color = useColorModeValue("blue.200", "#d0d3e7");
   const btnBg = useColorModeValue("gray.100", "#646887");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
+  const handleLogOut = async () => {
+    try {
+      await axiosInstance.get("/users/logout");
+      localStorage.clear();
+      navigate("/login");
+      location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Box
       position={"fixed"}
@@ -146,10 +161,10 @@ const Header = () => {
                           size={"xs"}
                           whiteSpace={"nowrap"}
                         >
-                          Adegbite Adewale
+                          {currentUser?.username}
                         </Heading>
                         <Text fontSize={".9rem"} color={"gray.500"}>
-                          Admin
+                          {currentUser?.role}
                         </Text>
                       </Flex>
                     </Show>
@@ -165,8 +180,9 @@ const Header = () => {
                     <MenuItem>Docs</MenuItem>
                     <MenuItem>FAQ</MenuItem>
                   </MenuGroup>
-                  <MenuItem>Create a Copy</MenuItem>
-                  <MenuItem>Mark as Draft</MenuItem>
+                  <MenuItem onClick={handleLogOut} color={"red"}>
+                    Log out
+                  </MenuItem>
                 </MenuList>
               </>
             )}

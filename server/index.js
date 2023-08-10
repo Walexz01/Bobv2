@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const fs = require("fs");
 const path = require("path");
 const customers = require("./routes/customers");
@@ -14,13 +15,13 @@ const orders = require("./routes/orders");
 const users = require("./routes/user");
 
 const app = express();
-
+app.use(cookieParser());
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
   { flags: "a" }
 );
 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,6 +37,6 @@ app.use("/api/payments", payments);
 app.use("/api/orders", orders);
 app.use("/api/users", users);
 
-const port = process.env.PORT | 500;
+const port = process.env.PORT || 500;
 
 app.listen(port, () => console.log(`app listening on ${port}`));

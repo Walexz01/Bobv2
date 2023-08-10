@@ -11,10 +11,15 @@ import lightLogo from "../../assets/lightLogo.png";
 import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { Links } from "../../data";
+import { BiUser } from "react-icons/bi";
+import { AuthContext } from "../../context/Auth";
+import { useContext } from "react";
+import { SlSocialDropbox } from "react-icons/sl";
 
 const Navbar = () => {
   const { colorMode } = useColorMode();
   const border = useColorModeValue("gray", "white");
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <Box
@@ -45,6 +50,16 @@ const Navbar = () => {
         {Links.map(({ Icon, name, path }, index) => (
           <Navlink key={index} Icon={Icon} name={name} path={path} />
         ))}
+        {currentUser?.role === "admin" ? (
+          <>
+            <Navlink
+              Icon={SlSocialDropbox}
+              name={"Products"}
+              path={"products"}
+            />
+            <Navlink Icon={BiUser} name={"Worker"} path={"workers"} />
+          </>
+        ) : null}
       </VStack>
     </Box>
   );
